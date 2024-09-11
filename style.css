@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    /* height: 100vh;
+    width: 100vw; */
+}
+
+#taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: aqua;
+}
+
+#taskbar ul {
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#taskbar li {
+    float: left;
+    height: 50px;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+#taskbar li.open {
+    background-color: #ffffff8f;
+}
+#taskbar li:hover {
+    background-color: #ffffffaf;
+}
+
+#taskbar li img {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+#taskbar li.right {
+    float: right;
+}
+
+#taskbar li.clock {
+    width: fit-content;
+}
+
+.clock p {
+    margin: 0;
+}
+
+#content {
+    position: fixed;
+    top: 0;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
