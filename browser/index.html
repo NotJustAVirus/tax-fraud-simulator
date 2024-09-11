@@ -9,21 +9,56 @@
 <body>
     <nav class="topbar">
         <ul>
-            <li class="site">Tax</li>
-            <li class="site">Tax long</li>
-            <li class="site">Tax2</li>
-            <li>+</li>
-            <li class="close">X</li>
+            <li class="site">
+                <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
+                <span>Tax</span>
+                <div class="siteclose">
+                    <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
+                </div>
+            </li>
+            <li class="site open">
+                <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
+                <span>Long Tax</span>
+                <div class="siteclose">
+                    <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
+                </div>
+            </li>
+            <li class="site">
+                <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
+                <span>Tax 2</span>
+                <div class="siteclose">
+                    <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
+                </div>
+            </li>
+            <li class="newsite">
+                <!-- should be changed to an icon -->
+                <p style="margin-top: 0; font-size: 25px;">+</p>
+            </li>
+            <li class="topbarnav close">
+                X
+            </li>
+            <li class="topbarnav">
+                []
+            </li>
+            <li class="topbarnav">
+                -
+            </li>
         </ul>
     </nav>
     <header class="navbar">
-        <button>back</button>
-        <button>forward</button>
-        <button>refresh</button>
-        <input type="text">
+        <button class="navbutton">
+            <img src="/icon/back.png" alt="back">
+        </button>
+        <button class="navbutton">
+            <img src="/icon/forward.png" alt="forward">
+        </button>
+        <button class="navbutton">
+            <img src="/icon/refresh.png" alt="refresh">
+        </button>
+        <input type="text" name="web" value="game://taxes.gov">
     </header>
     <section id="site">
-        <iframe src="/sites/taxform/" frameborder="0"></iframe>
+        <iframe src="taxform/" frameborder="0"></iframe>
     </section>
 </body>
 </html> 

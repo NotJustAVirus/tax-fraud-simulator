@@ -1,0 +1,17 @@
+body, body.light {
+    --text-color: #222;
+    --bkg-color: #fff;
+}
+/* Dark theme */
+body.dark {
+    --text-color: #eee;
+    --bkg-color: #121212;
+}
+
+@media (prefers-color-scheme: dark) {
+    /* dark theme */
+    body { 
+        --text-color: #eee;
+        --bkg-color: #121212;
+    }
+}
