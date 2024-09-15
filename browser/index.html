@@ -55,7 +55,9 @@
         <button class="navbutton">
             <img src="/icon/refresh.png" alt="refresh">
         </button>
-        <input type="text" name="web" value="game://taxes.gov">
+        <form action="getPage.php" method="get">
+            <input type="text" name="web" value="game://taxes.gov" autocomplete="off">
+        </form>
     </header>
     <section id="site">
         <iframe src="taxform/" frameborder="0"></iframe>
