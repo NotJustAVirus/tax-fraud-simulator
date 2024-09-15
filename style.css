@@ -76,3 +76,76 @@ iframe {
     height: 100%;
     border: none;
 }
+
+.startmenu {
+    position: fixed;
+    bottom: 50px;
+    display: grid;
+    grid-template-columns: min-content auto;
+    background-color: #da2e2e;
+}
+
+.startmenunav {
+    display: inline-flex;
+    width: 150px;
+    height: 100%;
+    flex-direction: column-reverse;
+}
+.startmenunav .navitem {
+    padding: 10px;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 30px auto;
+    align-items: center;
+    float: bottom;
+}
+.startmenunav .navitem:hover {
+    background-color: #ffffff8f;
+}
+.navitem img {
+    width: 30px;
+    height: 30px;
+}
+.navitem p {
+    margin-left: 10px;
+}
+
+.startmenucontent {
+    display: inline-flex;
+    height: 100%;
+}
+.startmenucontent .grid {
+    display: grid;
+    grid-template-columns: 105px 105px 105px;
+    grid-template-rows: 105px 105px 105px 105px;
+    padding: 20px;
+}
+
+.startmenuitem {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    background-color: #da2eff;
+    border: 1px solid #000;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.startmenuitem img {
+    width: 60px;
+    height: 60px;
+}
+
+.startmenuitem p {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+p {
+    margin: 0;
+}
