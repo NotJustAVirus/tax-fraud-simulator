@@ -1,66 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browser</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav class="topbar">
-        <ul>
-            <li class="site">
-                <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
-                <span>Tax</span>
-                <div class="siteclose">
-                    <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
-                </div>
-            </li>
-            <li class="site open">
-                <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
-                <span>Long Tax</span>
-                <div class="siteclose">
-                    <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
-                </div>
-            </li>
-            <li class="site">
-                <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
-                <span>Tax 2</span>
-                <div class="siteclose">
-                    <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
-                </div>
-            </li>
-            <li class="newsite">
-                <!-- should be changed to an icon -->
-                <p style="margin-top: 0; font-size: 25px;">+</p>
-            </li>
-            <li class="topbarnav close">
-                X
-            </li>
-            <li class="topbarnav">
-                []
-            </li>
-            <li class="topbarnav">
-                -
-            </li>
-        </ul>
-    </nav>
-    <header class="navbar">
-        <button class="navbutton">
-            <img src="/icon/back.png" alt="back">
-        </button>
-        <button class="navbutton">
-            <img src="/icon/forward.png" alt="forward">
-        </button>
-        <button class="navbutton">
-            <img src="/icon/refresh.png" alt="refresh">
-        </button>
-        <form action="getPage.php" method="get">
-            <input type="text" name="web" value="game://taxes.gov" autocomplete="off">
-        </form>
-    </header>
-    <section id="site">
-        <iframe src="website/darkweb.html" frameborder="0"></iframe>
-    </section>
-</body>
-</html> 
+<!-- <li class="site">
+    <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
+    <span>Tax</span>
+    <div class="siteclose">
+        <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
+    </div>
+</li>
+<li class="site open">
+    <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
+    <span>Long Tax</span>
+    <div class="siteclose">
+        <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
+    </div>
+</li>
+<li class="site">
+    <img src="/icon/water-cat.webp" alt="site icon" class="siteicon">
+    <span>Tax 2</span>
+    <div class="siteclose">
+        <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
+    </div>
+</li>
+<li class="newsite">
+    should be changed to an icon
+    <p style="margin-top: 0; font-size: 25px;">+</p>
+</li> -->
+<header class="navbar">
+    <button class="navbutton">
+        <img src="/icon/back.png" alt="back">
+    </button>
+    <button class="navbutton">
+        <img src="/icon/forward.png" alt="forward">
+    </button>
+    <button class="navbutton">
+        <img src="/icon/refresh.png" alt="refresh">
+    </button>
+    <form action="getPage.php" method="get">
+        <input type="text" name="web" value="game://taxes.gov" autocomplete="off">
+    </form>
+</header>
+<section id="site">
+    <iframe src="website/darkweb.html" frameborder="0"></iframe>
+</section>
