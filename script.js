@@ -59,6 +59,7 @@ const windowTmp = $.get("window.html");
 
 class App {
     open = false;
+    pinned = false;
 
     constructor(name, icon, link) {
         this.name = name;
@@ -69,6 +70,7 @@ class App {
     async launch() {
         this.open = true;
         this.createAppWindow();
+        if (!this.pinned) this.createAppTaskbar();
         this.el.find(".window-content").load(this.link);
     }
 
@@ -81,9 +83,25 @@ class App {
         this.el.appendTo("#desktop"); 
     }
 
+    createAppTaskbar() {
+        this.taskbar = $(`<li class="app-button" data-app="${this.link}">
+            <img src="/icon/${this.icon}" alt="${this.name}">
+        </li>`);
+        this.taskbar.click(() => appManager.launchApp(this.link));
+        this.taskbar.appendTo("#taskbar ul");
+    }
+
+    pin() {
+        this.pinned = true;
+        this.createAppTaskbar();
+    }
+
     close() {
         this.open = false;
         this.el.remove();
+        if (!this.pinned) {
+            this.taskbar.remove();
+        }
     }
 }
 let appManager = new AppManager();
