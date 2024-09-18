@@ -1,8 +1,18 @@
+/* global styles */
+
 body {
     margin: 0;
-    /* height: 100vh;
-    width: 100vw; */
 }
+
+.hidden {
+    display: none !important;
+}
+
+p {
+    margin: 0;
+}
+
+/* taskbar style */
 
 #taskbar {
     position: absolute;
@@ -62,8 +72,9 @@ body {
     margin-top: 15px;
 }
 
+/* desktop style */
 
-#content {
+#desktop {
     position: fixed;
     top: 0;
     bottom: 50px;
@@ -71,11 +82,7 @@ body {
     right: 0;
 }
 
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
+/* startmenu style */
 
 .startmenu {
     position: fixed;
@@ -145,10 +152,95 @@ iframe {
     margin-left: 5px;
     margin-bottom: 5px;
 }
-.hidden {
-    display: none !important;
+
+/* window style */
+
+.topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgb(69, 147, 73);
 }
 
-p {
+.topbar ul {
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
     margin: 0;
 }
+
+.topbar li {
+    float: left;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.topbar li.open {
+    background-color: rgb(178, 215, 226);
+}
+.topbar li:hover:not(.open) {
+    background-color: #ffffff6f;
+}
+.topbar li.close:hover {
+    background-color: rgb(232, 17, 35);
+}
+
+.topbar li.right {
+    float: right;
+}
+.topbar li.topbarnav {
+    float: right;
+    margin: 0;
+    width: 40px;
+}
+
+.topbar li.decoration {
+    background-color: transparent !important;
+    cursor: default;
+}
+
+.window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    transform-origin: 100px 150vh;
+    transition: transform 0.4s;
+}
+
+.window.minimized {
+    transform: scale(0.2);
+    transform-origin: 100px 150vh;
+    transition: transform 0.4s;
+}
+
+.window-content {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #241d1d;
+    overflow: auto;
+}
+
+li.window-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+}
+.window-icon img {
+    width: 24px;
+    height: 24px;
+}
+
+/*  */
