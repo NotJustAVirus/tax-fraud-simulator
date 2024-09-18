@@ -145,6 +145,9 @@ iframe {
     margin-left: 5px;
     margin-bottom: 5px;
 }
+.hidden {
+    display: none !important;
+}
 
 p {
     margin: 0;

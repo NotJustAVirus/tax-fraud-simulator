@@ -6,13 +6,15 @@
     <title>Desktop</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
     <section id="content">
-        <iframe src="browser/" frameborder="0"></iframe>
+        <iframe src="browser" frameborder="0"></iframe>
     </section>
     <nav id="taskbar">
-        <div class="startmenu">
+        <div class="startmenu hidden">
             <div class="startmenunav">
                 <div class="navitem">
                     <img src="icon/mail.png" alt="start icon">
@@ -53,22 +55,22 @@
             </div>
         </div>
         <ul>
-            <li>
+            <li class="startmenu-button">
                 <div>
                     <img src="icon/door.png" alt="door icon">
                 </div>
             </li>
-            <li>
+            <li class="app-button" data-app="mail">
                 <div>
                     <img src="icon/mail.png" alt="mail icon">
                 </div>
             </li>
-            <li class="open">
+            <li class="open app-button" data-app="browser">
                 <div>
                     <img src="icon/water-cat.webp" alt="browser icon">
                 </div>
             </li>
-            <li>
+            <li class="app-button" data-app="fax">
                 <div>
                     <img src="icon/fax-machine.png" alt="fax icon">
                 </div>                
