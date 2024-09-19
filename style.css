@@ -38,6 +38,10 @@ p {
     cursor: pointer;
 }
 #taskbar li.open {
+    border-bottom: 5px solid #000;
+    box-sizing: border-box;
+}
+#taskbar li.focused {
     background-color: #ffffff8f;
 }
 #taskbar li:hover {

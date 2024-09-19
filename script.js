@@ -15,8 +15,17 @@ class AppManager {
 
     constructor() {
         this.apps = [];
-        this.addApp(new App("WaterCat", "water-cat.webp", "browser"));
-        this.addApp(new App("Fax", "fax-machine.png", "fax"));
+        $(".startmenu").click(() => this.focusApp(null));
+        // $("#desktop").click(() => this.focusApp(null));
+        let browser = new App("WaterCat", "water-cat.webp", "browser");
+        browser.pin();
+        this.addApp(browser);
+        let fax = new App("Fax", "fax-machine.png", "fax");
+        fax.pin();
+        this.addApp(fax);
+        let test = new App("Test", "back.png", "login");
+        this.addApp(test);
+        this.launchApp("login");
     }
 
     addApp(app) {
@@ -33,22 +42,32 @@ class AppManager {
             // If app is not open, launch it
             if (!app.open) {
                 await app.launch();
-                this.focus = app;
+                this.focusApp(app);
                 return;
             }
             // If app is open and focused, minimize it
             if (this.focus === app) {
-                app.el.toggleClass("minimized");
-                this.focus = null;
+                app.el.addClass("minimized");
+                this.focusApp(null);
                 return;
             }
-            // If app is open but not focused, focus it
-            app.el.appendTo("#desktop");
+            // If app is open but minimized, restore it
+            app.el.appendTo("#desktop"); // Move to front
             setTimeout(() => app.el.removeClass("minimized"), 1);
-            // app.el.removeClass("minimized");
-            this.focus = app;
+            this.focusApp(app);
         } else {
             console.error("App not found");
+        }
+    }
+
+    focusApp(app) {
+        if (this.focus === app) return;
+        if (this.focus) {
+            this.focus.focus(false);
+        }
+        this.focus = app;
+        if (this.focus) {
+            this.focus.focus(true);
         }
     }
 
@@ -69,17 +88,22 @@ class App {
 
     async launch() {
         this.open = true;
-        this.createAppWindow();
         if (!this.pinned) this.createAppTaskbar();
+        this.taskbar.addClass("open");
+        await this.createAppWindow();
         this.el.find(".window-content").load(this.link);
     }
 
-    createAppWindow() {
+    async createAppWindow() {
+        await windowTmp;
         this.el = $(windowTmp.responseText);
         this.el.find(".window-title").text(this.name);
         this.el.find(".window-icon img").attr("src", "/icon/" + this.icon);
         this.el.find(".close").click(() => this.close());
-        this.el.find(".minimize").click(() => this.el.toggleClass("minimized"));
+        this.el.find(".minimize").click(() => {
+            this.el.addClass("minimized");
+            appManager.focusApp(null);
+        });
         this.el.appendTo("#desktop"); 
     }
 
@@ -91,16 +115,24 @@ class App {
         this.taskbar.appendTo("#taskbar ul");
     }
 
+    focus(focused) {
+        this.el.toggleClass("focused", focused);
+        this.taskbar.toggleClass("focused", focused);
+    }
+
     pin() {
         this.pinned = true;
         this.createAppTaskbar();
     }
 
     close() {
+        appManager.focusApp(null);
         this.open = false;
         this.el.remove();
         if (!this.pinned) {
             this.taskbar.remove();
+        } else {
+            this.taskbar.removeClass("open");
         }
     }
 }
