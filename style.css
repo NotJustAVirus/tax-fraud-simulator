@@ -211,15 +211,17 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    
     transform-origin: 100px 150vh;
-    transition: transform 0.4s;
+    transition-property: opacity, transform;
+    transition-duration: 0.2s;
 }
 
 .window.minimized {
     transform: scale(0.2);
     transform-origin: 100px 150vh;
-    transition: transform 0.4s;
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-duration: 0.2s;
 }
 
 .window-content {
