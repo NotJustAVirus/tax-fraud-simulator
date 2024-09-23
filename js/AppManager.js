@@ -52,7 +52,6 @@ export class AppManager {
     }
 
     focusApp(app) {
-        console.info(app);
         if (this.focus === app) return;
         if (this.focus) {
             this.focus.focus(false);

@@ -13,7 +13,7 @@ export class StartMenuApp extends App {
     }
 
     focus(focused) {
-        $(".startmenu").toggleClass("hidden", !focused);
+        $(".startmenu").toggleClass("closed", !focused);
         this.taskbar.toggleClass("focused", focused);
     }
 }

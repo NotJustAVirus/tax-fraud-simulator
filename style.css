@@ -94,6 +94,16 @@ p {
     display: grid;
     grid-template-columns: min-content auto;
     background-color: #da2e2e;
+    transition-property: opacity, transform;
+    transition-duration: 0.2s;
+}
+
+.startmenu.closed {
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(0, 300px);
+    transition-property: opacity, transform;
+    transition-duration: 0.2s;
 }
 
 .startmenunav {
