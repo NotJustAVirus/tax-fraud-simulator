@@ -9,6 +9,7 @@ export class App {
         this.icon = icon;
         this.link = link;
         this.appManager = appManager;
+        this.createAppStartMenu();
     }
 
     async launch() {
@@ -36,12 +37,23 @@ export class App {
         });
     }
 
-    createAppTaskbar() {
+    async createAppTaskbar() {
         this.taskbar = $(`<li class="app-button" data-app="${this.link}">
             <img src="/icon/${this.icon}" alt="${this.name}">
         </li>`);
         this.taskbar.click(() => this.appManager.launchApp(this.link));
         this.taskbar.appendTo("#taskbar ul");
+    }
+
+    async createAppStartMenu() {
+        this.startMenu = $(
+            `<div class="startmenuitem" data-app="${this.link}">
+                <img src="icon/${this.icon}" alt="${this.name}">
+                <p>${this.name}</p>
+            </div>`
+        );
+        this.startMenu.click(() => this.appManager.launchApp(this.link));
+        this.startMenu.appendTo(".startmenucontent .grid");
     }
 
     focus(focused) {

@@ -8,6 +8,10 @@ export class StartMenuApp extends App {
         this.pin();
     }
 
+    async createAppStartMenu() {
+        // do nothing
+    }
+
     focus(focused) {
         $(".startmenu").toggleClass("hidden", !focused);
         this.taskbar.toggleClass("focused", focused);

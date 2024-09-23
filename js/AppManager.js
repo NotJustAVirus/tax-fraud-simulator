@@ -6,8 +6,6 @@ export class AppManager {
 
     constructor() {
         this.apps = [];
-        $(".startmenu").click(() => this.focusApp(null));
-        // $("#desktop").click(() => this.focusApp(null));
         let startmenu = new StartMenuApp(this);
         this.addApp(startmenu);
         let browser = new App("WaterCat", "water-cat.webp", "browser", this);
@@ -54,6 +52,7 @@ export class AppManager {
     }
 
     focusApp(app) {
+        console.info(app);
         if (this.focus === app) return;
         if (this.focus) {
             this.focus.focus(false);
