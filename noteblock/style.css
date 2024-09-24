@@ -1,0 +1,10 @@
+#noteblock {
+    position: absolute;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    font-size: large;
+    font-family: 'Consolas', sans-serif;
+    padding: 7px;
+    overflow: scroll;
+    resize: none;
+}

@@ -13,6 +13,7 @@ export class App { // abstract
     }
 
     async launch() {
+        this.appManager.addStyle(this.link + "/style.css");
         this.open = true;
         if (!this.pinned) this.createAppTaskbar();
         this.taskbar.addClass("open");

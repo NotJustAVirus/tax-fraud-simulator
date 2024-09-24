@@ -80,7 +80,7 @@ body {
 
 .navbar {
     position: absolute;
-    top: 30px;
+    top: 0;
     padding-top: 10px;
     padding-left: 10px;
     left: 0;

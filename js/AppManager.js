@@ -3,9 +3,10 @@ import { StartMenuApp } from "./StartMenuApp.js";
 
 export class AppManager {
     focus = null;
+    apps = [];
+    styles = [];
 
     constructor() {
-        this.apps = [];
         let startmenu = new StartMenuApp(this);
         this.apps.push(startmenu);
     }
@@ -53,5 +54,11 @@ export class AppManager {
         if (this.focus) {
             this.focus.focus(true);
         }
+    }
+
+    async addStyle(style) {
+        if (this.styles.includes(style)) return;
+        let styleDOM = $(`<link rel="stylesheet" href="${style}">`);
+        styleDOM.appendTo("head");
     }
 }
