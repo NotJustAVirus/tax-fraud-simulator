@@ -1,6 +1,6 @@
 const windowTmp = $.get("window.html");
 
-export class App {
+export class App { // abstract
     open = false;
     pinned = false;
 

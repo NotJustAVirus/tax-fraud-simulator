@@ -7,20 +7,13 @@ export class AppManager {
     constructor() {
         this.apps = [];
         let startmenu = new StartMenuApp(this);
-        this.addApp(startmenu);
-        let browser = new App("WaterCat", "water-cat.webp", "browser", this);
-        browser.pin();
-        this.addApp(browser);
-        let fax = new App("Fax", "fax-machine.png", "fax", this);
-        fax.pin();
-        this.addApp(fax);
-        let test = new App("Test", "back.png", "login", this);
-        this.addApp(test);
-        this.launchApp("login");
+        this.apps.push(startmenu);
     }
 
-    addApp(app) {
-        this.apps.push(app);
+    loadApps(apps) {
+        apps.forEach(app => {
+            this.apps.push(new app(this));
+        });
     }
 
     getApp(appLink) {
