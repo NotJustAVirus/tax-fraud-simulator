@@ -15,4 +15,5 @@ let apps = [
 appManager.loadApps(apps);
 
 appManager.getApp("browser").pin();
+appManager.getApp("browser").launch();
 appManager.getApp("fax").pin();

@@ -1,0 +1,49 @@
+.newtab .center > * {
+    margin-bottom: 30px;
+}
+.newtab .logo img {
+    width: 100%;
+}
+.newtab .logo {
+    width: 35%;
+    max-width: 500px;
+    min-width: 300px;
+}
+
+.newtab .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%
+}
+
+.newtab input {
+    width: 40%;
+    min-width: 300px;
+    height: 24px;
+    font-size: 16px;
+    box-sizing: content-box;
+}
+
+.newtab .options {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.newtab .website-box {
+    padding: 15px;
+    margin: 10px;
+    background-color: chocolate;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.newtab .website-box img {
+    width: 100px;
+}
+p {
+    margin: 0;
+}

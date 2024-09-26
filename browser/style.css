@@ -118,7 +118,7 @@ body {
 #site {
     position: fixed;
     top: 75px;
-    bottom: 0;
+    bottom: 50px;
     left: 0;
     right: 0;
 }
