@@ -18,7 +18,9 @@ export class App { // abstract
         if (!this.pinned) this.createAppTaskbar();
         this.taskbar.addClass("open");
         await this.createAppWindow();
-        this.el.find(".window-content").load(this.link);
+        this.el.find(".window-content").load(this.link, () => {
+            if (this.onload) this.onload();
+        });
     }
 
     async createAppWindow() {

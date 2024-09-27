@@ -6,6 +6,12 @@ export class BrowserApp extends App {
     constructor(appManager) {
         super("WaterCat", "water-cat.webp", "browser", appManager);
     }
+
+    onload() {
+        $(".window-content").ready(() => {
+            this.newTab();
+        });
+    }
     
     async createAppWindow() {
         await super.createAppWindow();
@@ -15,7 +21,6 @@ export class BrowserApp extends App {
         </li>`);
         addTab.click(() => this.newTab());
         addTab.appendTo(".topbar ul");
-        this.newTab();
     }
 
     newTab() {
@@ -56,6 +61,8 @@ export class BrowserApp extends App {
     }
 }
 
+const newTabTmp = $.get("/browser/website/newtab.html");
+
 class Tab {
     constructor() {
         let icon = "water-cat.webp";
@@ -67,6 +74,24 @@ class Tab {
                 <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
             </div>
         </li>`);
+        this.createTabWindow();
+    }
+    
+    async createTabWindow() {
+        await newTabTmp;
+        this.window = $(newTabTmp.responseText);
+        let boxes = this.window.find(".website-box");
+        for (let i = 0; i < boxes.length; i++) {
+            let element = $(boxes[i]);
+            element.click(() => {
+                this.navigate(element.data("page"));
+            });
+        }
+        this.window.appendTo("#site");
+    }
+
+    navigate(page) {
+        console.log(page);
     }
 
     close() {
