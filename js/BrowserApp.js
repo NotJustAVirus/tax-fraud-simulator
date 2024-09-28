@@ -88,6 +88,7 @@ class Tab {
             });
         }
         this.window.appendTo("#site");
+        $("#site").addClass("newtab");
     }
 
     navigate(page) {
