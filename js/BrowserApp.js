@@ -24,7 +24,7 @@ export class BrowserApp extends App {
     }
 
     newTab() {
-        let tab = new Tab();
+        let tab = new Tab(this);
         tab.topbarTab.insertBefore(".newsite");
         tab.topbarTab.click(() => {
             this.openTab(tab);
@@ -64,7 +64,8 @@ export class BrowserApp extends App {
 const newTabTmp = $.get("/browser/website/newtab.html");
 
 class Tab {
-    constructor() {
+    constructor(browserApp) {
+        this.browserApp = browserApp;
         let icon = "water-cat.webp";
         let title = "New Tab";
         this.topbarTab = $(`<li class="site">
@@ -90,9 +91,14 @@ class Tab {
         this.window.appendTo("#site");
         $("#site").addClass("newtab");
     }
-
-    navigate(page) {
-        console.log(page);
+    
+    async navigate(page) {
+        let site = await $.get("browser/website/" + page + ".html");
+        this.browserApp.appManager.addStyle("browser/website/" + page + ".css")
+        this.window = $(site);
+        $("#site").children().replaceWith(this.window);
+        $("#site").removeClass();
+        $("#site").addClass(page);
     }
 
     close() {
