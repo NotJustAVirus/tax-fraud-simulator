@@ -19,6 +19,10 @@ export class Tab {
         this.window = $('<div class="website"></div>');
         this.window.addClass(page);
         $(site).appendTo(this.window);
+        this.open();
+    }
+
+    open() {
         $("#site").empty();
         $("#site").append(this.window);
     }

@@ -44,8 +44,8 @@ export class BrowserApp extends App {
             this.openedTab.topbarTab.removeClass("open");
         } catch (e) {}
         tab.topbarTab.addClass("open");
+        tab.open();
         this.openedTab = tab;
-        // TODO focus tabwindow
     }
 
     closeTab(tab) {
@@ -56,7 +56,11 @@ export class BrowserApp extends App {
             return;
         }
         if (this.openedTab = tab) {
-            this.openTab(this.tabs[this.tabs.length - 1]);
+            if (index < this.tabs.length - 1) {
+                this.openTab(this.tabs[index]);
+            } else {
+                this.openTab(this.tabs[this.tabs.length - 1]);
+            }
         }
         tab.close();
     }
