@@ -1,4 +1,5 @@
 import { App } from "./App.js";
+import { Tab } from "./Tab.js";
 
 export class BrowserApp extends App {
     tabs = [];
@@ -58,50 +59,5 @@ export class BrowserApp extends App {
             this.openTab(this.tabs[this.tabs.length - 1]);
         }
         tab.close();
-    }
-}
-
-const newTabTmp = $.get("/browser/website/newtab.html");
-
-class Tab {
-    constructor(browserApp) {
-        this.browserApp = browserApp;
-        let icon = "water-cat.webp";
-        let title = "New Tab";
-        this.topbarTab = $(`<li class="site">
-            <img src="/icon/${icon}" alt="site icon" class="siteicon">
-            <span>${title}</span>
-            <div class="siteclose">
-                <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
-            </div>
-        </li>`);
-        this.createTabWindow();
-    }
-    
-    async createTabWindow() {
-        await newTabTmp;
-        this.window = $(newTabTmp.responseText);
-        let boxes = this.window.find(".website-box");
-        for (let i = 0; i < boxes.length; i++) {
-            let element = $(boxes[i]);
-            element.click(() => {
-                this.navigate(element.data("page"));
-            });
-        }
-        this.window.appendTo("#site");
-        $("#site").addClass("newtab");
-    }
-    
-    async navigate(page) {
-        let site = await $.get("browser/website/" + page + ".html");
-        this.browserApp.appManager.addStyle("browser/website/" + page + ".css")
-        this.window = $(site);
-        $("#site").children().replaceWith(this.window);
-        $("#site").removeClass();
-        $("#site").addClass(page);
-    }
-
-    close() {
-        this.topbarTab.remove();
     }
 }
