@@ -58,6 +58,7 @@ export class AppManager {
 
     async addStyle(style) {
         if (this.styles.includes(style)) return;
+        this.styles.push(style);
         let styleDOM = $(`<link rel="stylesheet" href="${style}">`);
         styleDOM.appendTo("head");
     }

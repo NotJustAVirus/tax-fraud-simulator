@@ -1,8 +1,10 @@
 import { App } from "./App.js";
 import { Tab } from "./Tab.js";
+import { VirtualDNS } from "./VirtualDNS.js";
 
 export class BrowserApp extends App {
     tabs = [];
+    virtualDNS = new VirtualDNS();
 
     constructor(appManager) {
         super("WaterCat", "water-cat.webp", "browser", appManager);
@@ -11,6 +13,12 @@ export class BrowserApp extends App {
     onload() {
         $(".window-content").ready(() => {
             this.newTab();
+            $("#url").on("keydown", (e) => {
+                if (e.key == "Enter") {
+                    let url = $("#url").val();
+                    this.openedTab.navigate(this.virtualDNS.lookup(url));
+                }
+            });
         });
     }
     

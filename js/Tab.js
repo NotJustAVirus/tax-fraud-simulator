@@ -10,10 +10,11 @@ export class Tab {
                 <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
             </div>
         </li>`);
-        this.navigate("newtab");
+        this.navigate({ title: "New Tab", url: "", path: "newtab", icon: "close.webp" });
     }
     
-    async navigate(page) {
+    async navigate(website) {
+        let page = website ? website.path : "newtab";
         let site = await $.get("browser/website/" + page + ".html");
         this.browserApp.appManager.addStyle("browser/website/" + page + ".css")
         this.window = $('<div class="website"></div>');

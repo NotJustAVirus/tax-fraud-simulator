@@ -8,9 +8,11 @@
     <button class="navbutton">
         <img src="/icon/refresh.png" alt="refresh">
     </button>
-    <form action="getPage.php" method="get">
-        <input type="text" name="web" value="game://taxes.gov" autocomplete="off">
-    </form>
+    <input type="text" name="web" value="game://taxes.gov" autocomplete="off" id="url" list="sites">
+    <datalist id="sites">
+        <option value="Unemployed">
+        <option value="Homeless">
+    </datalist>
 </header>
 <section id="site">
     <!-- <iframe src="browser/website/newtab.html" frameborder="0"></iframe> -->
