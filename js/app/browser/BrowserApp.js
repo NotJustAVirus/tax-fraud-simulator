@@ -1,4 +1,4 @@
-import { App } from "./App.js";
+import { App } from "../App.js";
 import { Tab } from "./Tab.js";
 import { VirtualDNS } from "./VirtualDNS.js";
 

@@ -10,7 +10,7 @@ export class Tab {
                 <img src="/icon/close.webp" alt="close icon" class="sitecloseicon">
             </div>
         </li>`);
-        this.navigate({ title: "New Tab", url: "", path: "newtab", icon: "close.webp" });
+        this.navigate({ title: "New Tab", url: "", path: "newtab", icon: "water-cat.webp" });
     }
     
     async navigate(website) {

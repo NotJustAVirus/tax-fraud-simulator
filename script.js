@@ -1,7 +1,7 @@
 import { AppManager } from "./js/AppManager.js";
-import { BrowserApp } from "./js/BrowserApp.js";
-import { NoteBlockApp } from "./js/NoteBlockApp.js";
-import { FaxApp } from "./js/FaxApp.js";
+import { BrowserApp } from "./js/app/browser/BrowserApp.js";
+import { NoteBlockApp } from "./js/app/NoteBlockApp.js";
+import { FaxApp } from "./js/app/FaxApp.js";
 
 
 let appManager = new AppManager();

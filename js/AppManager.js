@@ -1,5 +1,5 @@
-import { App } from "./App.js";
-import { StartMenuApp } from "./StartMenuApp.js";
+import { App } from "./app/App.js";
+import { StartMenuApp } from "./app/StartMenuApp.js";
 
 export class AppManager {
     focus = null;
