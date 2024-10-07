@@ -4,7 +4,6 @@ import { VirtualDNS } from "./VirtualDNS.js";
 
 export class BrowserApp extends App {
     tabs = [];
-    virtualDNS = new VirtualDNS();
 
     constructor(appManager) {
         super("WaterCat", "water-cat.webp", "browser", appManager);
@@ -16,7 +15,7 @@ export class BrowserApp extends App {
             $("#url").on("keydown", (e) => {
                 if (e.key == "Enter") {
                     let url = $("#url").val();
-                    this.openedTab.navigate(this.virtualDNS.lookup(url));
+                    this.openedTab.navigate(VirtualDNS.lookup(url));
                 }
             });
         });
@@ -63,7 +62,7 @@ export class BrowserApp extends App {
             this.close();
             return;
         }
-        if (this.openedTab = tab) {
+        if (this.openedTab == tab) {
             if (index < this.tabs.length - 1) {
                 this.openTab(this.tabs[index]);
             } else {

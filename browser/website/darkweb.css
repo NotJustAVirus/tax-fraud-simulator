@@ -1,4 +1,4 @@
-.header {
+.darkweb .header {
     display: grid;
     grid-template-columns: min-content auto;
     grid-template-rows: min-content;
@@ -7,26 +7,26 @@
     margin: 15px;
 }
 
-.logo {
+.darkweb .logo {
     width: 50px;
     height: 50px;
 }
 
-.header h1 {
+.darkweb .header h1 {
     margin: 0;
     padding: 0;
     font-size: 40px;
     font-weight: 600;
 }
 
-.productgrid {
+.darkweb .productgrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
 }
 
-.product {
+.darkweb .product {
     display: grid;
     grid-template-columns: min-content auto;
     gap: 10px;
@@ -36,27 +36,27 @@
     justify-items: center;
 }
 
-.product .info {
+.darkweb .product .info {
     display: grid;
     grid-template-rows: min-content min-content min-content auto;
     gap: 5px;
 }
-.buy {
+.darkweb .buy {
     width: 100%;
 }
-.cost {
+.darkweb .cost {
     font-size: 20px;
     font-weight: 600;
 }
 
-.product * {
+.darkweb .product * {
     margin: 0;
 }
 
-p.bad {
+.darkweb p.bad {
     color: red;
 }
 
-p.good {
+.darkweb p.good {
     color: green;
 }
