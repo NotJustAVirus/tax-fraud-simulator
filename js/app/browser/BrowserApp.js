@@ -18,6 +18,14 @@ export class BrowserApp extends App {
                     this.openedTab.navigate(VirtualDNS.lookup(url));
                 }
             });
+            for (let i = 0; i < VirtualDNS.websites.length; i++) {
+                let website = VirtualDNS.websites[i];
+                let option = $(`<option value="${website.url}">`);
+                this.el.find("#sites").append(option);
+            }
+            this.el.find(".back").click(() => this.openedTab.back());
+            this.el.find(".forward").click(() => this.openedTab.forward());
+            this.el.find(".refresh").click(() => this.openedTab.refresh());
         });
     }
     

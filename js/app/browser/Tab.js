@@ -1,6 +1,9 @@
 import { NewTab } from "./website/NewTab.js";
 
 export class Tab {
+    history = [];
+    historyIndex = -1;
+
     constructor(browserApp) {
         this.browserApp = browserApp;
         let icon = "water-cat.webp";
@@ -16,11 +19,26 @@ export class Tab {
     }
     
     async navigate(website) {
-        let page = website ? website.path : "newtab";
-        let site = await $.get("browser/website/" + page + ".html");
+        if (website == null) {
+            console.error("Website not found");
+            return;
+        }
+        if (this.history.length - 1 > this.historyIndex) {
+            this.history.splice(this.historyIndex + 1, this.history.length - this.historyIndex);
+        }
         this.website = website;
-        this.topbarTab.find("span").text(website.title);
-        this.topbarTab.find(".siteicon").attr("src", "/icon/" + website.icon);
+        this.history.push(website);
+        this.historyIndex++;
+        console.log(this.history, this.historyIndex);
+        this.goToWebsite(this.historyIndex);
+    }
+    
+    async goToWebsite(historyIndex) {
+        this.website = this.history[historyIndex];
+        let page = this.website.path ? this.website.path : "newtab";
+        let site = await $.get("browser/website/" + page + ".html");
+        this.topbarTab.find("span").text(this.website.title);
+        this.topbarTab.find(".siteicon").attr("src", "/icon/" + this.website.icon);
         this.browserApp.appManager.addStyle("browser/website/" + page + ".css");
         if (this.window) {
             this.window.remove();
@@ -29,7 +47,25 @@ export class Tab {
         this.window.addClass(page);
         $(site).appendTo(this.window);
         this.open();
-        new website.script(this).start(this.window);
+        new this.website.script(this).start(this.window);
+    }
+
+    back() {
+        if (this.historyIndex > 0) {
+            this.historyIndex--;
+            this.goToWebsite(this.historyIndex);
+        }
+    }
+
+    forward() {
+        if (this.historyIndex < this.history.length - 1) {
+            this.historyIndex++;
+            this.goToWebsite(this.historyIndex);
+        }
+    }
+
+    refresh() {
+        this.goToWebsite(this.historyIndex);
     }
 
     open() {
