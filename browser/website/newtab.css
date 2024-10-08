@@ -39,6 +39,7 @@
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    border: none;
 }
 
 .newtab .website-box img {

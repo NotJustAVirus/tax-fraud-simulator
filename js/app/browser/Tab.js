@@ -18,9 +18,13 @@ export class Tab {
     async navigate(website) {
         let page = website ? website.path : "newtab";
         let site = await $.get("browser/website/" + page + ".html");
+        this.website = website;
         this.topbarTab.find("span").text(website.title);
         this.topbarTab.find(".siteicon").attr("src", "/icon/" + website.icon);
         this.browserApp.appManager.addStyle("browser/website/" + page + ".css");
+        if (this.window) {
+            this.window.remove();
+        }
         this.window = $('<div class="website"></div>');
         this.window.addClass(page);
         $(site).appendTo(this.window);
@@ -29,11 +33,14 @@ export class Tab {
     }
 
     open() {
-        $("#site").empty();
         $("#site").append(this.window);
+        if (this.website != undefined) {
+            this.browserApp.setURL(this.website.url);
+        }
     }
 
     close() {
         this.topbarTab.remove();
+        this.window.remove();
     }
 }

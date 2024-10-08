@@ -31,6 +31,10 @@ export class BrowserApp extends App {
         addTab.appendTo(".topbar ul");
     }
 
+    setURL(url) {
+        $("#url").val(url);
+    }
+
     newTab() {
         let tab = new Tab(this);
         tab.topbarTab.insertBefore(".newsite");
