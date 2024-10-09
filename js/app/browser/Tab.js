@@ -23,13 +23,16 @@ export class Tab {
             console.error("Website not found");
             return;
         }
+        if (this.history[this.historyIndex] == website) {
+            this.refresh();
+            return;
+        }
         if (this.history.length - 1 > this.historyIndex) {
             this.history.splice(this.historyIndex + 1, this.history.length - this.historyIndex);
         }
         this.website = website;
         this.history.push(website);
         this.historyIndex++;
-        console.log(this.history, this.historyIndex);
         this.goToWebsite(this.historyIndex);
     }
     
