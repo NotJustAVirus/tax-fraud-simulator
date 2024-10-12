@@ -12,6 +12,10 @@ p {
     margin: 0;
 }
 
+* {
+    font-family: consolas;
+}
+
 /* taskbar style */
 
 #taskbar {
@@ -244,7 +248,7 @@ p {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #241d1d;
+    background-color: #ffffff;
     overflow: auto;
 }
 
