@@ -10,23 +10,21 @@ export class BrowserApp extends App {
     }
 
     onload() {
-        $(".window-content").ready(() => {
-            this.newTab();
-            $("#url").on("keydown", (e) => {
-                if (e.key == "Enter") {
-                    let url = $("#url").val();
-                    this.openedTab.navigate(VirtualDNS.lookup(url));
-                }
-            });
-            for (let i = 0; i < VirtualDNS.websites.length; i++) {
-                let website = VirtualDNS.websites[i];
-                let option = $(`<option value="${website.url}">`);
-                this.el.find("#sites").append(option);
+        this.newTab();
+        $("#url").on("keydown", (e) => {
+            if (e.key == "Enter") {
+                let url = $("#url").val();
+                this.openedTab.navigate(VirtualDNS.lookup(url));
             }
-            this.el.find(".back").click(() => this.openedTab.back());
-            this.el.find(".forward").click(() => this.openedTab.forward());
-            this.el.find(".refresh").click(() => this.openedTab.refresh());
         });
+        for (let i = 0; i < VirtualDNS.websites.length; i++) {
+            let website = VirtualDNS.websites[i];
+            let option = $(`<option value="${website.url}">`);
+            this.el.find("#sites").append(option);
+        }
+        this.el.find(".back").click(() => this.openedTab.back());
+        this.el.find(".forward").click(() => this.openedTab.forward());
+        this.el.find(".refresh").click(() => this.openedTab.refresh());
     }
     
     async createAppWindow() {
@@ -36,7 +34,7 @@ export class BrowserApp extends App {
             <p style="margin-top: 0; font-size: 25px;">+</p>
         </li>`);
         addTab.click(() => this.newTab());
-        addTab.appendTo(".topbar ul");
+        this.el.find(".topbar ul").append(addTab);
     }
 
     setURL(url) {

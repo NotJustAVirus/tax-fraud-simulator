@@ -19,7 +19,9 @@ export class App { // abstract
         this.taskbar.addClass("open");
         await this.createAppWindow();
         this.el.find(".window-content").load("html/app/" + this.link + ".html", () => {
-            if (this.onload) this.onload();
+            this.el.find(".window-content").ready(() => {
+                if (this.onload) this.onload();
+            });
         });
     }
 
