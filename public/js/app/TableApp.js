@@ -4,13 +4,21 @@ export class TableApp extends App {
     columnWidth = 60;
     rowHeight = 25;
     columnExceptions = {
-        2: 100,
+        2: 150,
     };
     rowExceptions = {
         2: 50,
     };
     heights = [];
     widths = [];
+    incomes = {
+        "Freelance": 500,
+        "Job": 1000,
+    }
+    expenses = {
+        "Rent": 1000,
+        "Utilities": 200,
+    }
     
     constructor(appManager) {
         super("Table", "table.webp", "table", appManager);
@@ -21,29 +29,58 @@ export class TableApp extends App {
         this.canvas.width = 2000;
         this.canvas.height = 2000;
         this.ctx = this.canvas.getContext("2d");
-        this.ctx.font = "16px Consolas";
-        this.ctx.textBaseline = "middle";
         this.drawTable();
+        this.ctx.textBaseline = "middle";
         this.ctx.fillStyle = "#000";
-        this.writeText(0, 0, "A1");
-        this.writeText(1, 1, "B2");
-        this.writeNumber(0, 1, 3);
-        this.ctx.font = "40px Consolas";
-        this.writeNumber(0, 2, 3);
-        this.writeText(2, 2, "jfpd");
+        this.ctx.font = "36px Consolas";
+        this.writeText(2, 2, "Budget");
+        this.ctx.font = "16px Consolas";
+        this.writeMoney();
+    }
+
+    writeMoney() {
+        let column = 2;
+        let row = 3;
+        let totalIncome = this.listItems("Income", this.incomes, column, row);
+        row += Object.keys(this.incomes).length + 1;
+        this.writeText(column, row, "Total Income");
+        this.writeNumber(column + 1, row, totalIncome);
+        row += 2;
+        let totalExpenses = this.listItems("Expenses", this.expenses, column, row);
+        row += Object.keys(this.expenses).length + 1;
+        this.writeText(column, row, "Total Expenses");
+        this.writeNumber(column + 1, row, totalExpenses);
+        row += 2;
+
+        this.writeText(column, row, "Profit");
+        let profit = totalIncome - totalExpenses;
+        this.writeNumber(column + 1, row, profit);
+    }
+
+    listItems(title, items, column, row) {
+        this.writeText(column, row, title);
+        row++;
+        let total = 0;
+        for (let key in items) {
+            this.writeText(column, row, key);
+            this.writeNumber(column + 1, row, items[key]);
+            total += items[key];
+            row++;
+        }
+        return total;
     }
     
     drawTable() {
         this.ctx.fillStyle = "#f0f0f0";
-        this.ctx.fillRect(0, 0, 40, 2000);
-        this.ctx.fillRect(0, 0, 2000, 25);
+        this.ctx.fillRect(0, 0, 40, this.canvas.height);
+        this.ctx.fillRect(0, 0, this.canvas.width, 25);
         this.ctx.fillStyle = "#555";
         this.ctx.textAlign = "center";
 
         this.widths = [];
         let x = 40;
-        for (let i = 0; x < 2000; i++) {
-            this.ctx.fillRect(x, 0, 1, 2000);
+        for (let i = 0; x < this.canvas.width; i++) {
+            this.ctx.fillRect(x, 0, 1, this.canvas.height);
             let width = this.columnWidth;
             if (this.columnExceptions[i]) {
                 width = this.columnExceptions[i];
@@ -58,8 +95,8 @@ export class TableApp extends App {
         
         this.heights = [];
         let y = 25;
-        for (let i = 0; y < 2000; i++) {
-            this.ctx.fillRect(0, y, 2000, 1);
+        for (let i = 0; y < this.canvas.height; i++) {
+            this.ctx.fillRect(0, y, this.canvas.width, 1);
             let height = this.rowHeight;
             if (this.rowExceptions[i]) {
                 height = this.rowExceptions[i];
