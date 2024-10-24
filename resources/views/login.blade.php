@@ -10,7 +10,8 @@
     <div class="centerbox">
         <img src="image/icon/user-profile.jpg" alt="profile silhouette" class="profilepic">
         <h1>Welcome</h1>
-        <form action="postlogin.php" method="post">
+        <form method="post">
+            @csrf
             <input type="text" name="username" id="username" required placeholder="Username">
             <input type="password" name="password" id="password" required placeholder="Password">
             <br>
