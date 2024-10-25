@@ -15,10 +15,17 @@
     </section>
     <div class="startmenu closed">
         <div class="startmenunav">
-            <div class="navitem">
+            <form action="logout" method="post" class="navitem-form">
+                @csrf
+                <button class="navitem">
+                    <img src="image/icon/mail.png" alt="start icon">
+                    <p>Logout</p>
+                </button>
+            </form>
+            <button class="navitem">
                 <img src="image/icon/mail.png" alt="start icon">
-                <p>Start</p>
-            </div>
+                <p>hi</p>
+            </button>
         </div>
         <div class="startmenucontent">
             <div class="grid">

@@ -116,13 +116,19 @@ p {
     height: 100%;
     flex-direction: column-reverse;
 }
+.navitem-form {
+    width: 100%;
+    display: contents;
+}
 .startmenunav .navitem {
     padding: 10px;
     cursor: pointer;
     display: grid;
     grid-template-columns: 30px auto;
     align-items: center;
-    float: bottom;
+    border: none;
+    text-decoration: none;
+    background-color: #ffffff00;
 }
 .startmenunav .navitem:hover {
     background-color: #ffffff8f;
@@ -132,6 +138,9 @@ p {
     height: 30px;
 }
 .navitem p {
+    text-align: left;
+    font: 15px consolas;
+    color: #000;
     margin-left: 10px;
 }
 

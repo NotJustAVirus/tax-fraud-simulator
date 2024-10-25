@@ -33,7 +33,7 @@ export class TableApp extends App {
         this.ctx.textBaseline = "middle";
         this.ctx.fillStyle = "#000";
         this.ctx.font = "36px Consolas";
-        this.writeText(2, 2, "Budget");
+        this.writeText(2, 2, "Finances");
         this.ctx.font = "16px Consolas";
         this.writeMoney();
     }

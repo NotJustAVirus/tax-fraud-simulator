@@ -22,18 +22,30 @@ body {
     padding-bottom: 200px;
 }
 
-input[type="text"], input[type="password"] {
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 50px;
+    justify-content: center;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
     width: 90%;
     padding: 5px;
     margin: 5px 0;
     border: 1px solid #ccc;
 }
 
-input[type="submit"] {
+input[type="submit"], button {
     width: 90%;
     padding: 5px;
     margin: 5px 0;
     border: 1px solid #ccc;
     background-color: #4CAF50;
     color: white;
+}
+
+.fail-message {
+    color: red;
+    font-size: 12px;
 }
