@@ -13,17 +13,12 @@
     <div class="centerbox">
         <img src="image/icon/user-profile.jpg" alt="profile silhouette" class="profilepic">
         <h1>Login</h1>
-        <?php
-        $query = request()->query();
-        if (array_key_exists('fail', $query)) {
-            $fail = $query['fail'];
-            $failmessage = 'Unable to login';
-            if ($fail == 'credentials') {
-                $failmessage = 'Username or password is incorrect';
-            }
+        @php
+        $failmessage = request()->session()->pull('fail');
+        if ($failmessage) {
             echo '<p style="color: red;">' . $failmessage . '</p>';
         }
-        ?>
+        @endphp
         <form method="post">
             @csrf
             <input type="text" name="username" id="username" required placeholder="Username">

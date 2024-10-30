@@ -8,6 +8,12 @@
 </head>
 <body>
     <div class="centerbox">
+        @php
+        $failmessage = request()->session()->pull('fail');
+        if ($failmessage) {
+            echo '<p style="color: red;">' . $failmessage . '</p>';
+        }
+        @endphp
         <div class="options">
             <div class="signin-option">
                 <img src="image/icon/user-profile.jpg" alt="profile silhouette" class="profilepic">

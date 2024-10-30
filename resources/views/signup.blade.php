@@ -13,21 +13,12 @@
     <div class="centerbox">
         <img src="image/icon/user-profile.jpg" alt="profile silhouette" class="profilepic">
         <h1>Signup</h1>
-        <?php
-        $query = request()->query();
-        if (array_key_exists('fail', $query)) {
-            $fail = $query['fail'];
-            $failmessage = 'Something went wrong';
-            if ($fail == 'username') {
-                $failmessage = 'Username already exists';
-            } else if ($fail == 'email') {
-                $failmessage = 'Email already exists';
-            } else if ($fail == 'password') {
-                $failmessage = 'Passwords do not match';
-            }
+        @php
+        $failmessage = request()->session()->pull('fail');
+        if ($failmessage) {
             echo '<p style="color: red;">' . $failmessage . '</p>';
         }
-        ?>
+        @endphp
         <form method="post">
             @csrf
             <input type="text" name="username" id="username" required placeholder="Username">
