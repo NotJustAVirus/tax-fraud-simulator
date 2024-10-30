@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+    <a class="back-button" href="welcome">
+        <img src="image/icon/back.png" alt="Back arrow icon">
+    </a>
     <div class="centerbox">
         <img src="image/icon/user-profile.jpg" alt="profile silhouette" class="profilepic">
         <h1>Login</h1>
