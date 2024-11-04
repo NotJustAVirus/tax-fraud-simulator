@@ -52,10 +52,10 @@ export class App { // abstract
 
     async createAppStartMenu() {
         this.startMenu = $(
-            `<div class="startmenuitem" data-app="${this.link}">
+            `<button class="startmenuitem" data-app="${this.link}">
                 <img src="/image/icon/${this.icon}" alt="${this.name}">
                 <p>${this.name}</p>
-            </div>`
+            </button>`
         );
         this.startMenu.click(() => this.appManager.launchApp(this.link));
         this.startMenu.appendTo(".startmenucontent .grid");
