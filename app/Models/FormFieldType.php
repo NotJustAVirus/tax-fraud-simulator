@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DarkwebProduct extends Model
+class FormFieldType extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
-    protected $table = 'darkweb_products';
+    protected $table = 'form_field_types';
 
     protected $fillable = [
-        'level_criteria',
         'name',
-        'description',
-        'image',
-        'price',
-        'sus',
-        'modifier',
     ];
+
+    public function fields()
+    {
+        return $this->hasMany(FormField::class, 'type_id');
+    }
 }
