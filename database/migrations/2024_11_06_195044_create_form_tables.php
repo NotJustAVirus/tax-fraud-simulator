@@ -73,6 +73,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('form_tables');
+        Schema::dropIfExists('form_field_answers');
+        Schema::dropIfExists('form_answers');
+        Schema::dropIfExists('form_has_fields');
+        Schema::dropIfExists('form_field_options');
+        Schema::dropIfExists('form_fields');
+        Schema::dropIfExists('form_field_types');
+        Schema::dropIfExists('forms');
     }
 };

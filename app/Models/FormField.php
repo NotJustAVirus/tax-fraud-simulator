@@ -20,7 +20,7 @@ class FormField extends Model
 
     public function type()
     {
-        return $this->hasOne(FormFieldType::class);
+        return $this->hasOne(FormFieldType::class, 'id', 'type_id');
     }
 
     public function options()

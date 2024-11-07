@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\DarkwebController;
+use App\Http\Controllers\FormController;
 
 Route::get('/', function () {return view('desktop');})->name('desktop')->middleware('auth');
 
@@ -17,3 +18,7 @@ Route::post('/logout', [SignUpController::class, 'logout'])->middleware('auth');
 
 Route::get('/darkweb', [DarkwebController::class, 'getAllItems'])->middleware('auth');
 Route::post('/darkweb/buy/{id}', [DarkwebController::class, 'buyItem'])->middleware('auth');
+
+Route::get('/form', [FormController::class, 'getForms'])->middleware('auth');
+Route::get('/form/{id}', [FormController::class, 'getForm'])->middleware('auth');
+Route::post('/form/{id}', [FormController::class, 'submitForm'])->middleware('auth');
