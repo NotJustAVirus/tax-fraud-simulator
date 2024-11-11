@@ -44,6 +44,92 @@ export class FraudHub extends WebsiteScript {
     }
 
     openForm(form) {
-        throw new Error("Not implemented");
+        $.get(`/form/${form.id}`).done((form) => {
+            this.displayForm(new Form(form));
+        });
+    }
+
+    displayForm(form) {
+        this.DOM.find("section").empty();
+        let formDiv = $(`<div class="form">
+            <h2>${form.name}</h2>
+            <div class="description">${form.description}</div>
+        </div>`);
+        for (let field of form.fields) {
+            let fieldDiv = field.createFieldDiv();
+            formDiv.append(fieldDiv);
+        }
+        let submitButton = $(`<button class="submit">Submit</button>`);
+        submitButton.click(() => {
+            form.submit();
+        });
+        formDiv.append(submitButton);
+        this.DOM.find("section").append(formDiv);
+    }
+}
+
+class Form {
+    constructor(obj) {
+        this.name = obj.name;
+        this.description = obj.description;
+        this.image = obj.image;
+        this.sus = obj.sus;
+        this.value = obj.value;
+        this.fields = [];
+        for (let field of obj.fields) {
+            this.fields.push(new Field(field));
+        }
+    }
+}
+
+class Field {
+    constructor(obj) {
+        this.order = obj.pivot.order;
+        this.required = obj.pivot.required;
+        this.type = obj.type.name;
+        this.name = obj.name;
+        this.description = obj.description;
+        this.placeholder = obj.placeholder;
+        this.options = [];
+        for (let option of obj.options) {
+            this.options.push(option.value);
+        }
+    }
+
+    createFieldDiv() {
+        let fieldDiv = $(`<div class="field">
+            <label>${this.name}</label>
+        </div>`);
+        let input;
+        switch (this.type) {
+            case "textarea":
+                input = $(`<textarea></textarea>`);
+                if (this.placeholder) {
+                    input.attr("placeholder", this.placeholder);
+                }
+                break;
+            case "select":
+                input = $(`<select></select>`);
+                for (let option of this.options) {
+                    input.append(`<option value="${option}">${option}</option>`);
+                }
+                break;
+            case "radio":
+                for (let option of this.options) {
+                    let radio = $(`<input type="radio" name="${this.name}" value="${option}" id="${option}">`);
+                    let label = $(`<label for="${option}">${option}</label>`);
+                    fieldDiv.append(radio);
+                    fieldDiv.append(label);
+                }
+                break;
+            default:
+                input = $(`<input type="${this.type}">`);
+                if (this.placeholder) {
+                    input.attr("placeholder", this.placeholder);
+                }
+                break;
+        }
+        fieldDiv.append(input);
+        return fieldDiv;
     }
 }
