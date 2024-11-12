@@ -70,6 +70,7 @@ export class FraudHub extends WebsiteScript {
 
 class Form {
     constructor(obj) {
+        this.id = obj.id;
         this.name = obj.name;
         this.description = obj.description;
         this.image = obj.image;
@@ -80,10 +81,29 @@ class Form {
             this.fields.push(new Field(field));
         }
     }
+
+    submit() {
+        let data = {};
+        for (let field of this.fields) {
+            let input = field.input;
+            let value;
+            if (field.type === "radio") {
+                value = input.find(":checked").val();
+            } else {
+                value = input.val();
+            }
+            data["field_" + field.id] = value;
+        }
+        data._token = $("meta[name='csrf_token']").attr("content");
+        $.post(`/form/${this.id}`, data).done((response) => {
+            console.log(response);
+        });
+    }
 }
 
 class Field {
     constructor(obj) {
+        this.id = obj.id;
         this.order = obj.pivot.order;
         this.required = obj.pivot.required;
         this.type = obj.type.name;
@@ -98,7 +118,7 @@ class Field {
 
     createFieldDiv() {
         let fieldDiv = $(`<div class="field">
-            <label>${this.name}</label>
+            <label>${this.name}:</label>
         </div>`);
         let input;
         switch (this.type) {
@@ -121,6 +141,7 @@ class Field {
                     fieldDiv.append(radio);
                     fieldDiv.append(label);
                 }
+                input = fieldDiv;
                 break;
             default:
                 input = $(`<input type="${this.type}">`);
@@ -130,6 +151,7 @@ class Field {
                 break;
         }
         fieldDiv.append(input);
+        this.input = input;
         return fieldDiv;
     }
 }

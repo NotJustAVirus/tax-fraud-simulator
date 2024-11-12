@@ -72,12 +72,12 @@ return new class extends Migration
             'value' => 10,
             'sus' => 100,
         ]);
-        $form->fields()->attach($fieldName, ['order' => 1, 'required' => true]);
-        $form->fields()->attach($fieldBirthdate, ['order' => 3, 'required' => true]);
-        $form->fields()->attach($fieldGender, ['order' => 4, 'required' => true]);
-        $form->fields()->attach($fieldAddress, ['order' => 5, 'required' => true]);
-        $form->fields()->attach($fieldSecurity, ['order' => 6, 'required' => true]);
-        $form->fields()->attach($fieldSecurityAnswer, ['order' => 7, 'required' => true]);
+        $form->fields()->attach($fieldName, ['order' => 1]);
+        $form->fields()->attach($fieldBirthdate, ['order' => 3]);
+        $form->fields()->attach($fieldGender, ['order' => 4]);
+        $form->fields()->attach($fieldAddress, ['order' => 5]);
+        $form->fields()->attach($fieldSecurity, ['order' => 6]);
+        $form->fields()->attach($fieldSecurityAnswer, ['order' => 7]);
     }
 
     /**
