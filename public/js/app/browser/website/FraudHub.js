@@ -138,6 +138,9 @@ class Field {
                 for (let option of this.options) {
                     let radio = $(`<input type="radio" name="${this.name}" value="${option}" id="${option}">`);
                     let label = $(`<label for="${option}">${option}</label>`);
+                    if (this.placeholder && this.placeholder === option) {
+                        radio.attr("checked", "checked");
+                    }
                     fieldDiv.append(radio);
                     fieldDiv.append(label);
                 }
