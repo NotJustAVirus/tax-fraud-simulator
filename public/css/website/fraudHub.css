@@ -8,7 +8,7 @@
 
 .fraudHub main {
     display: grid;
-    grid-template-columns: 20% auto;
+    grid-template-columns: minmax(320px, 20%) minmax(480px, 80%);
     height: calc(100% - 60px);
 }
 
@@ -41,7 +41,12 @@
     width: 100px;
 }
 
-.fraudHub section {
-    padding: 10px;
+.fraudHub .form-container {
+    width: 100%;
+    height: 100%;
+}
+
+.fraudHub .loading-img {
+    width: 100%;
 }
 

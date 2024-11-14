@@ -1,7 +1,7 @@
 import { WebsiteScript } from './WebsiteScript.js';
 
 export class FraudHub extends WebsiteScript {
-    
+    loadingElement = $(`<img src="/image/working.webp" alt="Loading screen" class="loading-img">`);
 
     run() {
         $.get("/form").done((forms) => {
@@ -12,10 +12,12 @@ export class FraudHub extends WebsiteScript {
 
     displayForms() {
         let nav = this.DOM.find("nav");
+        nav.empty();
         for (let form of this.forms) {
             let formNavButton = this.createFormNavButton(form);
             nav.append(formNavButton);
         }
+        this.openForm(this.forms[0]);
     }
 
     createFormNavButton(form) {
@@ -44,13 +46,14 @@ export class FraudHub extends WebsiteScript {
     }
 
     openForm(form) {
+        this.DOM.find("section").empty();
+        this.DOM.find("section").append(this.loadingElement);
         $.get(`/form/${form.id}`).done((form) => {
             this.displayForm(new Form(form));
         });
     }
 
     displayForm(form) {
-        this.DOM.find("section").empty();
         let formDiv = $(`<div class="form">
             <h2>${form.name}</h2>
             <div class="description">${form.description}</div>
@@ -64,6 +67,7 @@ export class FraudHub extends WebsiteScript {
             form.submit();
         });
         formDiv.append(submitButton);
+        this.DOM.find("section").empty();
         this.DOM.find("section").append(formDiv);
     }
 }
@@ -131,7 +135,11 @@ class Field {
             case "select":
                 input = $(`<select></select>`);
                 for (let option of this.options) {
-                    input.append(`<option value="${option}">${option}</option>`);
+                    let optionElement = $(`<option value="${option}">${option}</option>`);
+                    if (this.placeholder && this.placeholder === option) {
+                        optionElement.attr("selected", "selected");
+                    }
+                    input.append(optionElement);
                 }
                 break;
             case "radio":
