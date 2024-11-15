@@ -35,6 +35,10 @@
     background-color: #77f324;
     justify-items: center;
 }
+.darkweb .product img {
+    width: 100px;
+    height: 100px;
+}
 
 .darkweb .product .info {
     display: grid;
