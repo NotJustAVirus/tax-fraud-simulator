@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('darkweb_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('level_criteria');
+            $table->integer('level_criteria')->default(1);
             $table->string('name');
             $table->text('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('price');
             $table->integer('sus');
-            $table->json('modifier');
+            $table->json('modifier')->nullable();
         });
     }
 
