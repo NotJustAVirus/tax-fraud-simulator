@@ -10,7 +10,8 @@ class DarkwebController extends Controller {
         return response()->json($items);
     }
 
-    public function buyItem($id) {
+    public function buyItem() {
+        $productId = request('productId');
         throw new \Exception('Not implemented');
     }
 }
