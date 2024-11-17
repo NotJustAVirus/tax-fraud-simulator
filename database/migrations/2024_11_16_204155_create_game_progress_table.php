@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('game_progress', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
             $table->integer('level')->default(1);
             $table->integer('day')->default(1);
             $table->integer('money')->default(0);
             $table->integer('sus')->default(0);
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
