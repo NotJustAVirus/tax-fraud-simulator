@@ -11,6 +11,8 @@ class GameProgress extends Model {
     public $timestamps = false;
     protected $table = 'game_progress';
 
+    protected $hidden = ['id', 'user_id'];
+
     public function user() {
         return $this->belongsTo(User::class);
     }

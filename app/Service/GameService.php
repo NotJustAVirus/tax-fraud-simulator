@@ -9,8 +9,13 @@ class GameService {
     private $financeService;
 
 
-    public function __construct(GameProgress $gameProgress) {
-        $this->gameProgress = $gameProgress;
+    public function __construct() {
+        $this->gameProgress = auth()->user()->gameProgress;
+        if (!$this->gameProgress) {
+            $this->gameProgress = new GameProgress();
+            auth()->user()->gameProgress()->save($this->gameProgress);
+            $this->gameProgress->save();
+        }
         $this->financeService = new FinanceService();
     }
 
@@ -18,6 +23,13 @@ class GameService {
         $this->gameProgress->day += 1;
         $this->gameProgress->money += $this->financeService->getAccountsPayout();
         $this->gameProgress->sus -= 1;
+        if ($this->gameProgress->sus < 0) {
+            $this->gameProgress->sus = 0;
+        }
         $this->gameProgress->save();
+    }
+
+    public function getGameProgress() {
+        return $this->gameProgress;
     }
 }

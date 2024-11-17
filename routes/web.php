@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\DarkwebController;
 use App\Http\Controllers\FormController;
 
@@ -15,6 +16,9 @@ Route::post('/login', [SignUpController::class, 'login'])->middleware('guest');
 Route::post('/signup', [SignUpController::class, 'signup'])->middleware('guest');
 Route::post('/signupGuest', [SignUpController::class, 'signupGuest'])->middleware('guest');
 Route::post('/logout', [SignUpController::class, 'logout'])->middleware('auth');
+
+Route::get('/gamestate', [GameController::class, 'getState'])->middleware('auth');
+Route::post('/gamestate', [GameController::class, 'updateState'])->middleware('auth');
 
 Route::get('/darkweb', [DarkwebController::class, 'getAllItems'])->middleware('auth');
 Route::post('/darkweb/buy', [DarkwebController::class, 'buyItem'])->middleware('auth');
