@@ -32,7 +32,8 @@ export class Darkweb extends WebsiteScript {
             <p class="cost">$${item.price}</p>
         </div>`);
         productDiv.find(".buy").click(() => {
-            $.post("/darkweb/buy", { productId: item.id }).done((res) => {
+            let _token = $("meta[name='csrf_token']").attr("content");
+            $.post("/darkweb/buy", { productId: item.id, _token: _token }).done((res) => {
                 if (res.error) {
                     alert(res.error);
                 } else {
