@@ -24,7 +24,6 @@ class FinanceService {
         }
         return $export;
     }
-    
 
     public function getAccountsPayout(): int {
         $total = 0;

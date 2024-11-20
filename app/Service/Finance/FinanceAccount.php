@@ -10,7 +10,7 @@ abstract class FinanceAccount {
     }
 
     public function isExpense(): bool {
-        return $this->value < 0;
+        return $this->getValue() < 0;
     }
     
     public function getName(): string {

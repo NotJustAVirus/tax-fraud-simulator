@@ -21,6 +21,13 @@ return new class extends Migration
             $table->integer('sus');
             $table->json('modifier')->nullable();
         });
+
+        Schema::create('darkweb_transactions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('product_id')->constrained('darkweb_products');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -29,5 +36,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('darkweb_products');
+        Schema::dropIfExists('darkweb_transactions');
     }
 };

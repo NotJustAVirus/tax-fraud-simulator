@@ -21,4 +21,9 @@ class DarkwebProduct extends Model
         'sus',
         'modifier',
     ];
+
+
+    public function owners() {
+        return $this->hasMany(User::class, 'darkweb_transactions', 'product_id', 'user_id');
+    }
 }

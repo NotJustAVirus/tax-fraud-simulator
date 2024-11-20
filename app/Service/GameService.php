@@ -32,4 +32,27 @@ class GameService {
     public function getGameProgress() {
         return $this->gameProgress;
     }
+
+    public function hasMoney($amount) {
+        return $this->gameProgress->money >= $amount;
+    }
+
+    public function isTooLowLevel($level) {
+        return $this->gameProgress->level < $level;
+    }
+
+    public function isTooMuchSus($sus) {
+        // TODO: should take into account suscap
+        return $this->gameProgress->sus > $sus;
+    }
+
+    public function addSus($sus) {
+        $this->gameProgress->sus += $sus;
+        $this->gameProgress->save();
+    }
+
+    public function withdraw($amount) {
+        $this->gameProgress->money -= $amount;
+        $this->gameProgress->save();
+    }
 }

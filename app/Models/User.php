@@ -49,4 +49,8 @@ class User extends Authenticatable
     public function gameProgress() {
         return $this->hasOne(GameProgress::class);
     }
+
+    public function darkwebProducts() {
+        return $this->belongsToMany(DarkwebProduct::class, 'darkweb_transactions', 'user_id', 'product_id');
+    }
 }
