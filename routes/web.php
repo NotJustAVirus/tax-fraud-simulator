@@ -26,3 +26,5 @@ Route::post('/darkweb/buy', [DarkwebController::class, 'buyItem'])->middleware('
 Route::get('/form', [FormController::class, 'getForms'])->middleware('auth');
 Route::get('/form/{id}', [FormController::class, 'getForm'])->middleware('auth');
 Route::post('/form/{id}', [FormController::class, 'submitForm'])->middleware('auth');
+
+Route::get('/finance', [GameController::class, 'getFinance'])->middleware('auth');

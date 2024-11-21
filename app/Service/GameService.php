@@ -33,6 +33,11 @@ class GameService {
         return $this->gameProgress;
     }
 
+    public function getFinance() {
+        return $this->financeService->exportAccounts();
+    }
+
+
     public function hasMoney($amount) {
         return $this->gameProgress->money >= $amount;
     }
@@ -45,6 +50,7 @@ class GameService {
         // TODO: should take into account suscap
         return $this->gameProgress->sus > $sus;
     }
+
 
     public function addSus($sus) {
         $this->gameProgress->sus += $sus;

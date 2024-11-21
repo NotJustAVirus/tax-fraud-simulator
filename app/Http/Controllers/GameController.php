@@ -21,4 +21,9 @@ class GameController extends Controller {
         $gameService->processDay();
         return $this->getState();
     }
+
+    public function getFinance() {
+        $finance = $this->gameService->getFinance();
+        return response()->json($finance);
+    }
 }
