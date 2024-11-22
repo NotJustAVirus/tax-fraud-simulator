@@ -29,6 +29,10 @@ export class TableApp extends App {
         this.canvas.width = 2000;
         this.canvas.height = 2000;
         this.ctx = this.canvas.getContext("2d");
+        this.updateAccounts();
+    }
+    
+    draw() {
         this.drawTable();
         this.ctx.textBaseline = "middle";
         this.ctx.fillStyle = "#000";
@@ -123,5 +127,13 @@ export class TableApp extends App {
             height = this.rowExceptions[row];
         }
         this.ctx.fillText(value, x, this.heights[row] + (height / 2) + 2);
+    }
+
+    updateAccounts() {
+        $.get("finance", (data) => {
+            this.incomes = data.income;
+            this.expenses = data.expense;
+            this.draw();
+        });
     }
 }
