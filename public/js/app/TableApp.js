@@ -25,6 +25,9 @@ export class TableApp extends App {
     }
 
     onload() {
+        this.el.find("#refresh").click(() => {
+            this.updateAccounts();
+        });
         this.canvas = this.el.find("canvas")[0];
         this.canvas.width = 2000;
         this.canvas.height = 2000;
