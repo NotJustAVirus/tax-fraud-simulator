@@ -69,6 +69,13 @@ p {
     width: fit-content;
 }
 
+#progress {
+    background-color: blue;
+    height: 25px;
+    margin: 0 5px;
+    color: white;
+}
+
 .clock p {
     margin: 0;
 }
