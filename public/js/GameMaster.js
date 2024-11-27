@@ -40,7 +40,11 @@ export  class GameMaster {
         }
         this.gameState = gameState;
         for (let i = 0; i < this.callback.length; i++) {
-            this.callback[i](this.gameState);
+            try {
+                this.callback[i](this.gameState);
+            } catch (e) {
+                console.error(e);
+            }
         }
     }
 
@@ -50,5 +54,12 @@ export  class GameMaster {
 
     addCallback(callback) {
         this.callback.push(callback);
+    }
+
+    removeCallback(callback) {
+        let index = this.callback.indexOf(callback);
+        if (index !== -1) {
+            this.callback.splice(index, 1);
+        }
     }
 }

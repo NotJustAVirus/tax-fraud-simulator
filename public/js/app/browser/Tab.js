@@ -50,7 +50,10 @@ export class Tab {
         this.window.addClass(page);
         $(site).appendTo(this.window);
         this.open();
-        new this.website.script(this).start(this.window);
+        if (this.script) {
+            this.script.stop();
+        }
+        this.script = new this.website.script(this).start(this.window);
     }
 
     back() {

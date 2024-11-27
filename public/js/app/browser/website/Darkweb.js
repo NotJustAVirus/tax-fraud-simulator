@@ -1,3 +1,4 @@
+import { GameMaster } from '../../../GameMaster.js';
 import { WebsiteScript } from './WebsiteScript.js';
 
 export class Darkweb extends WebsiteScript {
@@ -7,6 +8,17 @@ export class Darkweb extends WebsiteScript {
             this.items = items;
             this.displayItems();
         });
+        GameMaster.getInstance().addCallback(this.updateGameState.bind(this));
+        this.updateGameState(GameMaster.getInstance().getGameState());
+    }
+
+    stop() {
+        GameMaster.getInstance().removeCallback(this.updateGameState);
+    }
+
+    updateGameState(gameState) {
+        this.DOM.find(".money").text("$" + gameState.money);
+        this.DOM.find(".sus").text(gameState.sus + "ඞ");
     }
 
     displayItems() {
@@ -34,11 +46,11 @@ export class Darkweb extends WebsiteScript {
         productDiv.find(".buy").click(() => {
             let _token = $("meta[name='csrf_token']").attr("content");
             $.post("/darkweb/buy", { productId: item.id, _token: _token }).done((res) => {
-                if (res.error) {
-                    alert(res.error);
-                } else {
-                    alert(res.message);
-                }
+                alert("Purchase successful");
+                GameMaster.getInstance().updateGameState();
+            }).fail((res) => {
+                alert("Purchase failed");
+                console.error(res);
             });
         });
         return productDiv;

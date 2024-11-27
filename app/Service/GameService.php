@@ -48,7 +48,7 @@ class GameService {
 
     public function isTooMuchSus($sus) {
         // TODO: should take into account suscap
-        return $this->gameProgress->sus > $sus;
+        return $this->gameProgress->sus + $sus > 1000;
     }
 
 

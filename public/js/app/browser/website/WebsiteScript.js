@@ -12,4 +12,8 @@ export class WebsiteScript {
     run() {
         // generic website does nothing
     }
+
+    stop() {
+        // generic website does nothing
+    }
 }
