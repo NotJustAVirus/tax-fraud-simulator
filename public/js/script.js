@@ -4,9 +4,22 @@ import { NoteBlockApp } from "./app/NoteBlockApp.js";
 import { FaxApp } from "./app/FaxApp.js";
 import { TableApp } from "./app/TableApp.js";
 import { VirtualDNS } from "./app/browser/VirtualDNS.js";
+import { GameMaster } from "./GameMaster.js";
 
+
+let gameMaster = GameMaster.getInstance();
+gameMaster.updateGameState();
+
+gameMaster.addCallback((gameState) => {
+    $("#day").text("Day " + gameState.day);
+});
+
+$("#progress").click(() => {
+    gameMaster.progressGameState();
+});
 
 let appManager = new AppManager();
+
 
 let apps = [
     BrowserApp,
