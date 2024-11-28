@@ -4,11 +4,16 @@ import { WebsiteScript } from './WebsiteScript.js';
 export class NewTab extends WebsiteScript {
     
     run() {
-        let boxes = this.DOM.find(".website-box");
-        for (let i = 0; i < boxes.length; i++) {
-            let element = $(boxes[i]);
-            element.click(() => {
-                let website = VirtualDNS.lookup(element.data("page"));
+        for (let i = 0; i < VirtualDNS.websites.length; i++) {
+            let website = VirtualDNS.websites[i];
+            let box = $(`<button type="button" class="website-box">
+                <img src="/image/icon/close.webp" alt="website logo">
+                <p>Website</p>
+            </button>`);
+            box.find("img").attr("src", "image/icon/" + website.icon);
+            box.find("p").text(website.title);
+            this.DOM.find(".options").append(box);
+            box.click(() => {
                 this.tab.navigate(website);
             });
         }
