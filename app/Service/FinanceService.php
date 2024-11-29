@@ -8,6 +8,7 @@ class FinanceService {
     public function __construct() {
         $this->accounts = [
             new Finance\JobIncome(),
+            new Finance\DarkwebPurchases(),
         ];
     }
 
