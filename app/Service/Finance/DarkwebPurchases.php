@@ -2,7 +2,7 @@
 
 namespace App\Service\Finance;
 
-use App\Models\DarkwebTransaction;
+use App\Models\Pivots\DarkwebTransaction;
 
 class DarkwebPurchases extends FinanceAccount {
     public function __construct() {

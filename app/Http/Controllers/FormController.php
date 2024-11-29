@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Form;
 use App\Models\FormAnswer;
-use App\Models\FormFieldAnswer;
+use App\Models\Pivots\FormFieldAnswer;
 
 class FormController extends Controller {
     public function getForms() {
