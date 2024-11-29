@@ -24,9 +24,13 @@ return new class extends Migration
 
         Schema::create('darkweb_transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('product_id')->constrained('darkweb_products');
             $table->timestamps();
+            $table->integer('price');
+            $table->integer('sus');
+            $table->integer('day');
+
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('product_id')->constrained('darkweb_products');
         });
     }
 

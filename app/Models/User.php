@@ -51,6 +51,8 @@ class User extends Authenticatable
     }
 
     public function darkwebProducts() {
-        return $this->belongsToMany(DarkwebProduct::class, 'darkweb_transactions', 'user_id', 'product_id');
+        return $this->belongsToMany(DarkwebProduct::class, 'darkweb_transactions', 'user_id', 'product_id')
+            ->using(DarkwebTransaction::class)
+            ->withPivot('day', 'price', 'sus');
     }
 }

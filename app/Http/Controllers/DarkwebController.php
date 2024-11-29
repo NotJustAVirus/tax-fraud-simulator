@@ -29,7 +29,11 @@ class DarkwebController extends Controller {
         }
         $gameService->withdraw($product->price);
         $gameService->addSus($product->sus);
-        auth()->user()->darkwebProducts()->attach($product->id);
+        auth()->user()->darkwebProducts()->attach($product->id, [
+            'day' => auth()->user()->gameProgress->day,
+            'price' => $product->price,
+            'sus' => $product->sus
+        ]);
         return response()->json(['message' => 'Item bought']);
     }
 }
