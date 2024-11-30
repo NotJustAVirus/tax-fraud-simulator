@@ -61,7 +61,7 @@ export class TableApp extends App {
         row += 2;
 
         this.writeText(column, row, "Profit");
-        let profit = totalIncome - totalExpenses;
+        let profit = totalIncome + totalExpenses;
         this.writeNumber(column + 1, row, profit);
     }
 

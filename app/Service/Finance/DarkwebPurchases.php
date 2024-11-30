@@ -11,6 +11,6 @@ class DarkwebPurchases extends FinanceAccount {
 
     public function getValue(): int {
         $day = auth()->user()->gameProgress->day;
-        return auth()->user()->darkwebProducts()->wherePivot('day', $day)->sum('darkweb_transactions.price');
+        return -auth()->user()->darkwebProducts()->wherePivot('day', $day)->sum('darkweb_transactions.price');
     }
 }
