@@ -54,19 +54,23 @@ export class FraudHub extends WebsiteScript {
     }
 
     displayForm(form) {
-        let formDiv = $(`<div class="form">
+        let formDiv = $(`<form class="form" method="post">
             <h2>${form.name}</h2>
             <div class="description">${form.description}</div>
-        </div>`);
+        </form>`);
+        let csrfToken = $(`<input type="hidden" name="_token" value="${$("meta[name='csrf_token']").attr("content")}">`);
+        formDiv.append(csrfToken);
         for (let field of form.fields) {
             let fieldDiv = field.createFieldDiv();
             formDiv.append(fieldDiv);
         }
-        let submitButton = $(`<button class="submit">Submit</button>`);
-        submitButton.click(() => {
+        let submitButton = $(`<input type="submit" value="Submit">`);
+        formDiv.submit((event) => {
+            event.preventDefault();
             form.submit();
         });
         formDiv.append(submitButton);
+        form.div = formDiv;
         this.DOM.find("section").empty();
         this.DOM.find("section").append(formDiv);
     }
@@ -87,19 +91,7 @@ class Form {
     }
 
     submit() {
-        let data = {};
-        for (let field of this.fields) {
-            let input = field.input;
-            let value;
-            if (field.type === "radio") {
-                value = input.find(":checked").val();
-            } else {
-                value = input.val();
-            }
-            data["field_" + field.id] = value;
-        }
-        data._token = $("meta[name='csrf_token']").attr("content");
-        $.post(`/form/${this.id}`, data).done((response) => {
+        $.post(`/form/${this.id}`, this.div.serialize()).done((response) => {
             console.log(response);
         });
     }
@@ -144,7 +136,7 @@ class Field {
                 break;
             case "radio":
                 for (let option of this.options) {
-                    let radio = $(`<input type="radio" name="${this.name}" value="${option}" id="${option}">`);
+                    let radio = $(`<input type="radio" name="field_${this.id}" value="${option}" id="${option}">`);
                     let label = $(`<label for="${option}">${option}</label>`);
                     if (this.placeholder && this.placeholder === option) {
                         radio.attr("checked", "checked");
@@ -161,6 +153,8 @@ class Field {
                 }
                 break;
         }
+        input.attr("required", this.required);
+        input.attr("name", "field_" + this.id);
         fieldDiv.append(input);
         this.input = input;
         return fieldDiv;

@@ -15,7 +15,7 @@ class FormController extends Controller {
 
     public function getForm($id) {
         $form = Form::find($id);
-        $form->fields->load('type', 'options');
+        $form->fields->load('type', 'options')->sortBy('order');
         return response()->json($form);
     }
 
@@ -26,7 +26,7 @@ class FormController extends Controller {
             $value = request("field_$field->id");
             if (!$value) {
                 if ($field->pivot->required) {
-                    return response()->json(['error' => "Field '$field->name' is required"]);
+                    return response()->json(['error' => "Field '$field->name' is required"], 400);
                 }
                 continue;
             }
