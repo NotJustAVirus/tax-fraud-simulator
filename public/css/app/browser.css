@@ -1,32 +1,3 @@
-body {
-    margin: 0;
-}
-
-.topbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background-color: rgb(69, 147, 73);
-}
-
-.topbar ul {
-    list-style-type: none;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.topbar li {
-    float: left;
-    height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 10px;
-    text-align: center;
-    cursor: pointer;
-}
 .topbar li.site {
     width: 150px;
     text-align: left;
@@ -51,6 +22,9 @@ body {
 .topbar li.newsite {
     border-radius: 15px;
 }
+.topbar li.newsite:hover {
+    background-color: #ffffff6f;
+}
 .sitecloseicon {
     width: 12px;
     height: 12px;
@@ -59,23 +33,11 @@ body {
 .siteclose:hover {
     background-color: rgb(232, 17, 35);
 }
-.topbar li.open {
-    background-color: rgb(178, 215, 226);
+.topbar li.site.open {
+    background-color: var(--theme-color);
 }
-.topbar li:hover:not(.open) {
+.topbar li.site:hover:not(.open) {
     background-color: #ffffff6f;
-}
-.topbar li.close:hover {
-    background-color: rgb(232, 17, 35);
-}
-
-.topbar li.right {
-    float: right;
-}
-.topbar li.topbarnav {
-    float: right;
-    margin: 0;
-    width: 40px;
 }
 
 .navbar {
@@ -86,7 +48,7 @@ body {
     left: 0;
     right: 0;
     height: 35px;
-    background-color: rgb(178, 215, 226);
+    background-color: var(--theme-color);
 }
 
 .navbutton img {
@@ -103,7 +65,7 @@ body {
     margin-right: 15px;
     border: none;
     border-radius: 15px;
-    background-color: rgb(69, 147, 73);
+    background-color: var(--theme-color-dark);
     text-align: center;
     cursor: pointer;
 }
@@ -112,6 +74,7 @@ body {
     width: calc(100% - 160px);
     height: 24px;
     font-size: 16px;
+    border: none;
 }
 
 
@@ -128,5 +91,5 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: white;
+    background-color: var(--bkg-color);
 }

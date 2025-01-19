@@ -1,15 +1,21 @@
 :root {
     --theme-color: #007bff;
+    --theme-color-light: color-mix(in srgb, var(--theme-color), white 20%);
+    --theme-color-dark: color-mix(in srgb, var(--theme-color), black 20%);
 }
 
 body, body.light {
     --text-color: #222;
     --bkg-color: #fff;
+    --snd-bkg-color: #f8f9fa;
+    color-scheme: light;
 }
 /* Dark theme */
 body.dark {
     --text-color: #eee;
     --bkg-color: #121212;
+    --snd-bkg-color: #333;
+    color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,5 +23,7 @@ body.dark {
     body { 
         --text-color: #eee;
         --bkg-color: #121212;
+        --snd-bkg-color: #333;
+        color-scheme: dark;
     }
 }

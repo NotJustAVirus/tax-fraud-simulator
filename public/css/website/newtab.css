@@ -24,6 +24,14 @@
     height: 24px;
     font-size: 16px;
     box-sizing: content-box;
+    background-color: var(--bkg-color);
+    color: var(--text-color);
+    border-color: var(--theme-color);
+    border-style: solid;
+}
+
+.newtab input:focus-visible {
+    outline: none;
 }
 
 .newtab .options {
@@ -34,7 +42,7 @@
 .newtab .website-box {
     padding: 15px;
     margin: 10px;
-    background-color: chocolate;
+    background-color: var(--theme-color);
     display: flex;
     flex-direction: column;
     align-items: center;

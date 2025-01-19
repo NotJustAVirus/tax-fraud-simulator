@@ -2,6 +2,8 @@
 
 body {
     margin: 0;
+    background-color: var(--bkg-color);
+    color: var(--text-color);
 }
 
 .hidden {
@@ -20,6 +22,17 @@ p {
     font-family: consolas;
 }
 
+:is(input, textarea, button, select) {
+    background-color: var(--bkg-color);
+    color: var(--text-color);
+    border-color: var(--text-color);
+    border-style: solid;
+}
+
+input:focus-visible {
+    outline: none;
+}
+
 /* taskbar style */
 
 #taskbar {
@@ -28,7 +41,7 @@ p {
     left: 0;
     right: 0;
     width: 100%;
-    background-color: aqua;
+    background-color: var(--theme-color);
 }
 
 #taskbar ul {
@@ -70,7 +83,7 @@ p {
 }
 
 #progress {
-    background-color: blue;
+    background-color: var(--theme-color-dark);
     height: 25px;
     margin: 0 5px;
     color: white;
@@ -107,7 +120,7 @@ p {
     bottom: 50px;
     display: grid;
     grid-template-columns: min-content auto;
-    background-color: #da2e2e;
+    background-color: var(--theme-color-dark);
     transition-property: opacity, transform;
     transition-duration: 0.2s;
 }
@@ -169,7 +182,7 @@ p {
     position: relative;
     height: 100px;
     width: 100px;
-    background-color: #da2eff;
+    background-color: var(--theme-color);
     border: 1px solid #000;
     text-align: center;
     cursor: pointer;
@@ -198,7 +211,7 @@ p {
     left: 0;
     right: 0;
     width: 100%;
-    background-color: rgb(69, 147, 73);
+    background-color: var(--theme-color-dark);
 }
 
 .topbar ul {
@@ -218,13 +231,10 @@ p {
     cursor: pointer;
 }
 
-.topbar li.open {
-    background-color: rgb(178, 215, 226);
-}
-.topbar li:hover:not(.open) {
+.topbar li.topbarnav:hover {
     background-color: #ffffff6f;
 }
-.topbar li.close:hover {
+.topbar li.topbarnav.close:hover {
     background-color: rgb(232, 17, 35);
 }
 
@@ -238,7 +248,7 @@ p {
 }
 
 .topbar li.decoration {
-    background-color: transparent !important;
+    /* background-color: transparent !important; */
     cursor: default;
 }
 
@@ -267,7 +277,7 @@ p {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #ffffff;
+    background-color: var(--bkg-color);
     overflow: auto;
 }
 

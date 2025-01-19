@@ -1,5 +1,5 @@
 .fraudHub header {
-    background-color: #f8f8f8;
+    background-color: var(--snd-bkg-color);
     overflow: hidden;
     width: 100%;
     z-index: 1000;
@@ -13,13 +13,15 @@
 }
 
 .fraudHub nav {
-    background-color: #f8f8f8;
-    border-right: 1px solid #e7e7e7;
+    background-color: var(--snd-bkg-color);
+    /* border-right: 1px solid var(--text-color); */
     width: 100%;
     height: 100%;
 }
 
 .fraudHub .form-nav {
+    background-color: var(--bkg-color);
+    color: var(--text-color);
     width: 100%;
     display: flex;
     flex-direction: row;
