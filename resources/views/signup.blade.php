@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <a class="back-button" href="welcome">

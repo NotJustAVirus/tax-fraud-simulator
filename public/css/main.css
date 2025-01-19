@@ -27,3 +27,43 @@ body.dark {
         color-scheme: dark;
     }
 }
+
+/* global styles */
+
+body {
+    margin: 0;
+    background-color: var(--bkg-color);
+    color: var(--text-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+p {
+    margin: 0;
+}
+
+.button {
+    cursor: pointer;
+}
+
+* {
+    font-family: consolas;
+}
+
+:is(input, textarea, button, select) {
+    background-color: var(--bkg-color);
+    color: var(--text-color);
+    border-color: var(--text-color);
+    border-style: solid;
+}
+
+::placeholder {
+    color: var(--text-color);
+    opacity: 1;
+}
+
+input:focus-visible {
+    outline: none;
+}
