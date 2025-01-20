@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script defer src="js/script.js" type="module"></script>
 </head>
-<body>
+<body class="dark">
     <section id="desktop">
         <h1>This is the desktop</h1>
     </section>
@@ -56,6 +56,11 @@
                 <div>
                     <img src="image/icon/sound.png" alt="sound icon">
                 </div>
+            </li>
+            <li class="right icon color-scheme">
+                <button id="color-scheme">
+                    <img src="image/icon/sun.png" alt="color scheme icon">
+                </button>
             </li>
         </ul>
     </nav>

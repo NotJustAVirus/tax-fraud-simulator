@@ -30,6 +30,20 @@ let apps = [
 
 appManager.loadApps(apps);
 
+$("#color-scheme").click((e) => {
+    if ($("body").hasClass("dark")) {
+        $("body").removeClass("dark");
+        $("body").addClass("light");
+        $(e.delegateTarget).find("img").attr("src", "/image/icon/moon.png");
+        return;
+    } else {
+        $("body").addClass("dark");
+        $("body").removeClass("light");
+        $(e.delegateTarget).find("img").attr("src", "/image/icon/sun.png");
+        return;
+    }
+});
+
 // appManager.getApp("browser").pin();
 appManager.getApp("browser").launch();
 setTimeout(() => {
