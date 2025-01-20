@@ -36,8 +36,8 @@
     <nav id="taskbar">
         <ul>
             <li class="right clock">
-                <p id="day">Day 0</p>
                 <button id="progress">
+                    <p id="day">Day 0</p>
                     <p>Next day -></p>
                 </button>
                 {{-- <p>11-09-2024</p> --}}

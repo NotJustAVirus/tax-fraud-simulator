@@ -44,7 +44,9 @@ export class App { // abstract
 
     async createAppTaskbar() {
         this.taskbar = $(`<li class="app-button" data-app="${this.link}">
-            <img src="/image/icon/${this.icon}" alt="${this.name}">
+            <button>
+                <img src="/image/icon/${this.icon}" alt="${this.name}">
+            </button>
         </li>`);
         this.taskbar.click(() => this.appManager.launchApp(this.link));
         this.taskbar.appendTo("#taskbar ul");
