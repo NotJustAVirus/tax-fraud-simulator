@@ -8,3 +8,7 @@ nav {
     height: calc(100% - 50px);
     overflow: hidden;
 }
+
+body.dark .table-container {
+    filter: invert(1);
+}
