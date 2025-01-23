@@ -52,7 +52,7 @@ p {
     font-family: consolas;
 }
 
-:is(input, textarea, select) {
+input, textarea, select {
     background-color: var(--bkg-color);
     color: var(--text-color);
     border-color: var(--text-color);
@@ -60,7 +60,7 @@ p {
     accent-color: var(--theme-color);
 }
 
-:is(button, input[type="submit"]) {
+button, input[type="submit"] {
     background-color: var(--theme-color);
     color: white; /* TODO should be a contrast color */
     border-color: var(--text-color);
