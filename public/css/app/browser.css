@@ -57,7 +57,7 @@
     margin-top: 5px;
 }
 
-.navbutton {
+button.navbutton {
     float: left;
     width: 30px;
     height: 30px;
@@ -67,7 +67,6 @@
     border-radius: 15px;
     background-color: var(--theme-color-dark);
     text-align: center;
-    cursor: pointer;
 }
 
 .navbar input {
