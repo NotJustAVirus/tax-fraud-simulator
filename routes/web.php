@@ -6,6 +6,10 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\DarkwebController;
 use App\Http\Controllers\FormController;
 
+Route::get('/image/{path?}', function () {
+    return response()->file(public_path('image/placeholder.png'));
+})->where('path', '.*');
+
 Route::get('/', function () {return view('desktop');})->name('desktop')->middleware('auth');
 
 Route::get('/welcome', function () {return view('welcome');})->name('login')->middleware('guest');

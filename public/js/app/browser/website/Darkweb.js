@@ -31,10 +31,10 @@ export class Darkweb extends WebsiteScript {
     }
 
     createItemNavButton(item) {
-        let imgSrc = item.image ? item.image : "/image/icon/battery.png";
+        let imgSrc = item.image ? item.image : "icon/battery.png";
         let productDiv = $(`
         <div class="product">
-            <img src="${imgSrc}" alt="product">
+            <img src="image/${imgSrc}" alt="product">
             <div class="info">
                 <h2>${item.name}</h2>
                 <p>${item.description}</p>
