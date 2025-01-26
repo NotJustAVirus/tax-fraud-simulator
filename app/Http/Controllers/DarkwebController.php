@@ -7,7 +7,14 @@ use App\Service\GameService;
 
 class DarkwebController extends Controller {
     public function getAllItems() {
-        $items = DarkwebProduct::all();
+        $items = DarkwebProduct::with('owners')
+        ->where('level_criteria', '<=', auth()->user()->gameProgress->level)
+        ->get()
+        ->map(function($item) {
+            $item->isOwned = $item->owners->contains('id', auth()->id());
+            return $item;
+        })
+        ->makeHidden('owners');
         return response()->json($items);
     }
 

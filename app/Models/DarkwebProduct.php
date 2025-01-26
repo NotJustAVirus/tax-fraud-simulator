@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pivots\DarkwebTransaction;
 
 class DarkwebProduct extends Model
 {
@@ -24,6 +25,8 @@ class DarkwebProduct extends Model
 
 
     public function owners() {
-        return $this->hasMany(User::class, 'darkweb_transactions', 'product_id', 'user_id');
+        return $this->belongsToMany(User::class, 'darkweb_transactions', 'product_id', 'user_id')
+            ->using(DarkwebTransaction::class)
+            ->withPivot('day', 'price', 'sus');
     }
 }
