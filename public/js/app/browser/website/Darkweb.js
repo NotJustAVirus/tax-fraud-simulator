@@ -47,6 +47,7 @@ class Product {
         // this.modifier = data.modifier;
 
         this.DOM = $(`<div class="product">
+            <div class="overlay"></div>
             <img src="image/${this.image}" alt="product">
             <div class="info">
                 <h2>${this.name}</h2>
@@ -59,6 +60,9 @@ class Product {
         this.DOM.find(".buy").click(() => {
             this.buy();
         });
+        if (data.isOwned) {
+            this.DOM.addClass("bought");
+        }
     }
 
     buy() {
@@ -66,6 +70,7 @@ class Product {
         $.post("/darkweb/buy", { productId: this.id, _token: _token }).done((res) => {
             alert("Purchase successful");
             GameMaster.getInstance().updateGameState();
+            this.DOM.addClass("bought");
         }).fail((res) => {
             alert("Purchase failed");
             console.error(res);
