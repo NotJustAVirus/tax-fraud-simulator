@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DarkwebProduct;
+use App\Models\Pivots\DarkwebTransaction;
 use App\Service\GameService;
 
 class DarkwebController extends Controller {
@@ -20,6 +21,11 @@ class DarkwebController extends Controller {
 
     public function buyItem() {
         $productId = request('productId');
+        $transaction = DarkwebTransaction::where('user_id', auth()->id())
+        ->where('product_id', $productId);
+        if($transaction->exists()) {
+            return response()->json(['error' => 'Product already bought'], 400);
+        }
         $product = DarkwebProduct::find($productId);
         if(!$product) {
             return response()->json(['error' => 'Product not found'], 404);
