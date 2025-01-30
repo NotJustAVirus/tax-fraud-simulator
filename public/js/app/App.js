@@ -28,6 +28,7 @@ export class App { // abstract
     async createAppWindow() {
         await windowTmp;
         this.el = $(windowTmp.responseText);
+        this.el.attr("id", this.link);
         this.el.find(".window-title").text(this.name);
         this.el.find(".window-icon img").attr("src", "/image/icon/" + this.icon);
         this.el.find(".close").click(() => this.close());

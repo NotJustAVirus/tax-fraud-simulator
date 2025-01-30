@@ -1,0 +1,15 @@
+#fax .list {
+    margin: 20px max(10%, 20px);
+}
+
+#fax .list .item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#fax .list :is(.head, .total) {
+    font-weight: bold;
+}
