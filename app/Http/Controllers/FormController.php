@@ -33,10 +33,21 @@ class FormController extends Controller {
             $formData[$field->id] = $value;
         }
 
-        $formAnswer = new FormAnswer();
-        $formAnswer->form_id = $form->id;
-        $formAnswer->user_id = auth()->user()->id;
-        $formAnswer->save();
+        if (FormAnswer::where('form_id', $form->id)->where('user_id', auth()->user()->id)->exists()) {
+            // Update
+            $formAnswer = FormAnswer::where('form_id', $form->id)->where('user_id', auth()->user()->id)->first();
+            $formAnswer->day = auth()->user()->gameProgress->day;
+            $formAnswer->save();
+            FormFieldAnswer::where('form_answer_id', $formAnswer->id)->delete();
+        } else {
+            // Create
+            $formAnswer = new FormAnswer();
+            $formAnswer->form_id = $form->id;
+            $formAnswer->user_id = auth()->user()->id;
+            $formAnswer->day = auth()->user()->gameProgress->day;
+            $formAnswer->save();
+        }
+        
         foreach ($formData as $fieldId => $value) {
             $answer = new FormFieldAnswer();
             $answer->form_answer_id = $formAnswer->id;

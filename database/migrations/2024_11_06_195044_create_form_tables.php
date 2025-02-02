@@ -54,6 +54,8 @@ return new class extends Migration
         Schema::create('form_answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->boolval('to_fax')->default(true);
+            $table->integer('day');
 
             $table->foreignId('form_id')->constrained('forms');
             $table->foreignId('user_id')->constrained('users');
