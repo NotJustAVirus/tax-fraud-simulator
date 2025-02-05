@@ -19,6 +19,11 @@ class FormController extends Controller {
         return response()->json($form);
     }
 
+    public function getFormAnswers() {
+        $answers = FormAnswer::where('user_id', auth()->user()->id)->with('form')->get();
+        return response()->json($answers);
+    }
+
     public function submitForm($id) {
         $form = Form::find($id);
         $formData = [];
