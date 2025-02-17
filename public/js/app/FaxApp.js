@@ -8,6 +8,20 @@ export class FaxApp extends App {
     onload() {
         this.forms = [];
         this.loadForms();
+        this.el.find("#fax-update-button").click(() => {
+            let _token = $("meta[name='csrf_token']").attr("content");
+            let data = {_token: _token};
+            this.el.find(".form-element").each((index, element) => {
+                let id = "form_" + $(element).find(".form-send input").attr("id");
+                let checked = $(element).find(".form-send input").prop("checked");
+                data[id] = checked;
+            });
+            $.post("/fax/update", data).done(() => {
+                this.loadForms();
+            }).fail((err) => {
+                console.log(err);
+            });
+        });
     }
 
     loadForms() {
