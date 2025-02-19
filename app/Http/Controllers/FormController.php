@@ -24,6 +24,27 @@ class FormController extends Controller {
         return response()->json($answers);
     }
 
+    public function updateFax() {
+        $data = request()->all();
+        foreach ($data as $key => $value) {
+            if (strpos($key, 'form_') !== 0) {
+                continue;
+            }
+            $id = substr($key, 5);
+            $formAnswer = FormAnswer::where('form_id', $id)->where('user_id', auth()->user()->id)->first();
+            if (!$formAnswer) {
+                continue;
+            }
+            if ($value == "true") {
+                $formAnswer->to_fax = 1;
+            } else {
+                $formAnswer->to_fax = 0;
+            }
+            $formAnswer->save();
+        }
+        return response()->json('ok');
+    }
+
     public function submitForm($id) {
         $form = Form::find($id);
         $formData = [];

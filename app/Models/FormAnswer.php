@@ -12,6 +12,9 @@ class FormAnswer extends Model
 
     protected $table = 'form_answers';
 
+    protected $fillable = [
+        'to_fax',
+    ];
 
     public function form()
     {
