@@ -44,6 +44,9 @@ export class FaxApp extends App {
         this.el.find(".forms").empty();
         this.forms.forEach((form) => {
             const formElement = this.createFormElement(form.form);
+            if (form.to_fax === 1) {
+                formElement.find(".form-send input").prop("checked", true);
+            }
             totalValue += form.form.value;
             totalSus += form.form.sus;
             this.el.find(".forms").append(formElement);
@@ -55,7 +58,7 @@ export class FaxApp extends App {
     createFormElement(form) {
         let element = $(`<div class="form-element item">
             <div class="form-send">
-                <input type="checkbox" name="send" id="${form.id}" checked>
+                <input type="checkbox" name="send" id="${form.id}">
             </div>
             <div class="form-name">${form.name}</div>
             <div class="form-money">${form.value}</div>
