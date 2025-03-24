@@ -116,6 +116,9 @@ class Field {
         let fieldDiv = $(`<div class="field">
             <label>${this.name}:</label>
         </div>`);
+        if (this.description) {
+            fieldDiv.find("label").attr("title", this.description);
+        }
         let input;
         switch (this.type) {
             case "textarea":
