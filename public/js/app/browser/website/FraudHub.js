@@ -47,13 +47,18 @@ export class FraudHub extends WebsiteScript {
 
     openForm(form) {
         this.DOM.find("section").empty();
-        this.DOM.find("section").append(this.loadingElement);
-        $.get(`/form/${form.id}`).done((form) => {
-            this.displayForm(new Form(form));
-        });
+        if (form.answers[0]) {
+            let div = $(`<div>This form has already been filled out.</div>`);
+            this.DOM.find("section").append(div);
+        } else {
+            this.DOM.find("section").append(this.loadingElement);
+            $.get(`/form/${form.id}`).done((form_data) => {
+                this.displayForm(form, new Form(form_data));
+            });
+        }
     }
 
-    displayForm(form) {
+    displayForm(formObj, form) {
         let formDiv = $(`<form class="form" method="post">
             <h2>${form.name}</h2>
             <div class="description">${form.description}</div>
@@ -67,7 +72,12 @@ export class FraudHub extends WebsiteScript {
         let submitButton = $(`<input type="submit" value="Submit">`);
         formDiv.submit((event) => {
             event.preventDefault();
-            form.submit();
+            form.submit().then((success) => {
+                if (success) {
+                    formObj.answers.push({idk: "ok"});
+                    this.openForm(formObj);
+                }
+            });
         });
         formDiv.append(submitButton);
         form.div = formDiv;
@@ -90,9 +100,17 @@ class Form {
         }
     }
 
-    submit() {
-        $.post(`/form/${this.id}`, this.div.serialize()).done((response) => {
-            console.log(response);
+    async submit() {
+        return new Promise((resolve, reject) => {
+            $.post(`/form/${this.id}`, this.div.serialize()).done((response) => {
+                if (response === "ok") {
+                    resolve(true);
+                } else {
+                    reject(false);
+                }
+            }).fail(() => {
+                reject(false);
+            });
         });
     }
 }

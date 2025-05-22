@@ -8,8 +8,12 @@ use App\Models\Pivots\FormFieldAnswer;
 
 class FormController extends Controller {
     public function getForms() {
-        // $forms = Form::where('level_criteria', '<=', auth()->user()->level)->get();
-        $forms = Form::where('level_criteria', '<=', 1)->get();
+        // $forms = Form::where('level_criteria', '<=', auth()->user()->level)
+        $forms = Form::where('level_criteria', '<=', 1)
+        ->with('answers' , function($query) {
+            $query->where('user_id', auth()->user()->id);
+        })
+        ->get();
         return response()->json($forms);
     }
 
