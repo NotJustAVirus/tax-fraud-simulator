@@ -39,6 +39,18 @@ class SignUpController extends Controller {
         }
         
         try {
+            // Check if the email or username already exists
+            $existingUser = User::where('email', $email)->first();
+            if ($existingUser) {
+                request()->session()->flash("fail", "Email is already taken");
+                return view("signup");
+            }
+            $existingUser = User::where('username', $username)->first();
+            if ($existingUser) {
+                request()->session()->flash("fail", "Username is already taken");
+                return view("signup");
+            }
+            // Create the user
             $user = User::create([
                 "email" => $email,
                 "password" => $password,
@@ -46,7 +58,7 @@ class SignUpController extends Controller {
             ]);
             auth()->login($user);
         } catch (\Exception $e) {
-            request()->session()->flash("fail", "Unable to access the database or the username or email is already taken");
+            request()->session()->flash("fail", "Failed to create account");
             return view("signup");
         }
         return redirect()->route("desktop");
