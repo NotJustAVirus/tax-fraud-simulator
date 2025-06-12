@@ -39,8 +39,22 @@
     padding: 10px;
 }
 
+.fraudHub .form-nav .icon {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
 .fraudHub .form-nav img {
     width: 100px;
+}
+
+.fraudHub .form-nav .overlay-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .fraudHub .form-container {

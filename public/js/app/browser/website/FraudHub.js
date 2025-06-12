@@ -5,7 +5,11 @@ export class FraudHub extends WebsiteScript {
 
     run() {
         $.get("/form").done((forms) => {
-            this.forms = forms;
+            this.forms = [];
+            for (let form of forms) {
+                let formObj = new Form(form, this);
+                this.forms.push(formObj);
+            }
             this.displayForms();
         });
     }
@@ -14,90 +18,102 @@ export class FraudHub extends WebsiteScript {
         let nav = this.DOM.find("nav");
         nav.empty();
         for (let form of this.forms) {
-            let formNavButton = this.createFormNavButton(form);
+            let formNavButton = form.createFormNavButton();
             nav.append(formNavButton);
         }
         this.openForm(this.forms[0]);
     }
 
-    createFormNavButton(form) {
-        let imgSrc = form.image ? form.image : "/image/icon/battery.png";
-        let formNavButton = $(`<button class="form-nav">
-            <img src="/image/icon/battery.png" alt="Form icon">
-            <div class="info">
-            </div>
-        </button>`);
-        formNavButton.find("img").attr("src", imgSrc);
-        let info = formNavButton.find(".info");
-        info.append(`<div class="name">${form.name}</div>`);
-        if (form.description) {
-            info.append(`<div class="description">${form.description}</div>`);
-        }
-        if (form.sus) {
-            info.append(`<div class="sus">${form.sus}</div>`);
-        }
-        if (form.value) {
-            info.append(`<div class="money">$${form.value}</div>`);
-        }
-        formNavButton.click(() => {
-            this.openForm(form);
-        });
-        return formNavButton;
-    }
-
     openForm(form) {
         this.DOM.find("section").empty();
-        if (form.answers[0]) {
+        if (form.answered) {
             let div = $(`<div>This form has already been filled out.</div>`);
             this.DOM.find("section").append(div);
         } else {
             this.DOM.find("section").append(this.loadingElement);
             $.get(`/form/${form.id}`).done((form_data) => {
-                this.displayForm(form, new Form(form_data));
+                this.DOM.find("section").empty();
+                form.loadFields(form_data.fields);
+                let formDiv = form.createFormDiv();
+                this.DOM.find("section").append(formDiv);
             });
         }
-    }
-
-    displayForm(formObj, form) {
-        let formDiv = $(`<form class="form" method="post">
-            <h2>${form.name}</h2>
-            <div class="description">${form.description}</div>
-        </form>`);
-        let csrfToken = $(`<input type="hidden" name="_token" value="${$("meta[name='csrf_token']").attr("content")}">`);
-        formDiv.append(csrfToken);
-        for (let field of form.fields) {
-            let fieldDiv = field.createFieldDiv();
-            formDiv.append(fieldDiv);
-        }
-        let submitButton = $(`<input type="submit" value="Submit">`);
-        formDiv.submit((event) => {
-            event.preventDefault();
-            form.submit().then((success) => {
-                if (success) {
-                    formObj.answers.push({idk: "ok"});
-                    this.openForm(formObj);
-                }
-            });
-        });
-        formDiv.append(submitButton);
-        form.div = formDiv;
-        this.DOM.find("section").empty();
-        this.DOM.find("section").append(formDiv);
     }
 }
 
 class Form {
-    constructor(obj) {
+    constructor(obj, hub) {
+        this.hub = hub;
         this.id = obj.id;
         this.name = obj.name;
         this.description = obj.description;
         this.image = obj.image;
         this.sus = obj.sus;
         this.value = obj.value;
+        this.answered = obj.answers.length > 0;
+    }
+
+    loadFields(fields) {
         this.fields = [];
-        for (let field of obj.fields) {
+        for (let field of fields) {
             this.fields.push(new Field(field));
         }
+    }
+
+    createFormNavButton() {
+        let imgSrc = this.image ? this.image : "/image/icon/battery.png";
+        this.navButton = $(`<button class="form-nav">
+            <div class="icon">
+                <img src="/image/icon/check.png" alt="Check icon" class="overlay-icon">
+                <img src="${imgSrc}" alt="Form icon" class="form-icon">
+            </div>
+            <div class="info">
+            </div>
+        </button>`);
+        if (!this.answered) {
+            this.navButton.find(".icon img.overlay-icon").addClass("hidden");
+        }
+        let info = this.navButton.find(".info");
+        info.append(`<div class="name">${this.name}</div>`);
+        if (this.description) {
+            info.append(`<div class="description">${this.description}</div>`);
+        }
+        if (this.sus) {
+            info.append(`<div class="sus">${this.sus}</div>`);
+        }
+        if (this.value) {
+            info.append(`<div class="money">$${this.value}</div>`);
+        }
+        this.navButton.click(() => {
+            this.hub.openForm(this);
+        });
+        return this.navButton;
+    }
+
+    createFormDiv() {
+        this.div = $(`<form class="form" method="post">
+            <h2>${this.name}</h2>
+            <div class="description">${this.description}</div>
+        </form>`);
+        let csrfToken = $(`<input type="hidden" name="_token" value="${$("meta[name='csrf_token']").attr("content")}">`);
+        this.div.append(csrfToken);
+        for (let field of this.fields) {
+            let fieldDiv = field.createFieldDiv();
+            this.div.append(fieldDiv);
+        }
+        let submitButton = $(`<input type="submit" value="Submit">`);
+        this.div.submit((event) => {
+            event.preventDefault();
+            this.submit().then((success) => {
+                if (success) {
+                    this.answered = true;
+                    this.navButton.find(".icon img.overlay-icon").removeClass("hidden");
+                    this.hub.openForm(this);
+                }
+            });
+        });
+        this.div.append(submitButton);
+        return this.div;
     }
 
     async submit() {
